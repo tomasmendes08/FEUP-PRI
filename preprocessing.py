@@ -16,8 +16,6 @@ df_movies.dropna(subset=["tomatometer_status", "original_release_date"], inplace
 
 df_reviews.dropna(subset=["review_score", "critic_name"], inplace=True) # reviews apagadas do site
 
-
-
 # Read imdb dataset
 
 imdb_movies = pd.read_csv("dataset/IMDB/IMDb_movies.csv")
@@ -40,6 +38,17 @@ final_movies = pd.merge(imdb_movies, df_movies, left_on =["original_title", "yea
 
 final_movies.drop(columns=["movie_title", "release_year", "genre", "description", "duration", "director"], inplace=True)
 
-all_movies = final_movies["rotten_tomatoes_link"].to_numpy()
-df_reviews = df_reviews[df_reviews["rotten_tomatoes_link"].isin(all_movies)]
+all_rt_movies = final_movies["rotten_tomatoes_link"].to_numpy()
+all_imdb_movies = final_movies["imdb_title_id"].to_numpy()
+
+df_reviews = df_reviews[df_reviews["rotten_tomatoes_link"].isin(all_rt_movies)]
+imdb_ratings = imdb_ratings[imdb_ratings["imdb_title_id"].isin(all_imdb_movies)]
+
+final_movies = pd.merge(final_movies, imdb_ratings, how="inner", on="imdb_title_id")
+
+# Writes clean data to csv
+
+imdb_ratings.to_csv("dataset/refined/imdb_ratings.csv")
+df_reviews.to_csv("dataset/refined/rt_reviews.csv")
+final_movies.to_csv("dataset/refined/final_movies.csv")
 
