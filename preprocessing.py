@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 
-df_reviews = pd.read_csv("dataset/rotten_tomatoes_critic_reviews.csv")
-df_movies = pd.read_csv("dataset/rotten_tomatoes_movies.csv")
+df_reviews = pd.read_csv("dataset/RT/rotten_tomatoes_critic_reviews.csv")
+df_movies = pd.read_csv("dataset/RT/rotten_tomatoes_movies.csv")
 
 
 def handle_year(x):
@@ -20,7 +20,9 @@ df_reviews.dropna(subset=["review_score", "critic_name"], inplace=True) # review
 
 # Read imdb dataset
 
-imdb_movies = pd.read_csv("dataset/imdb/IMDb_movies.csv")
+imdb_movies = pd.read_csv("dataset/IMDB/IMDb_movies.csv")
+imdb_ratings = pd.read_csv("dataset/IMDB/IMDb_ratings.csv")
+
 
 release_dates = df_movies["original_release_date"]
 release_year = []
