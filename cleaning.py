@@ -1,8 +1,10 @@
 """
     CLEANING DATA
     
-    joins 'writer' with 'authors'
+    - joins 'writer' with 'authors'
+    (...)
 """
+import os
 import pandas as pd
 
 
@@ -23,5 +25,15 @@ for idx in range(len(movies)):
     new_authors = ", ".join(all_authors)
     movies.iloc[idx, movies.columns.get_loc("authors")] = new_authors
     
-movies.drop(columns=["writer"])
+movies.drop(columns=["writer"], inplace=True)
+
+
+movies["country"] = movies["country"].fillna(" ")
+movies["genres"] = movies["genres"].fillna("Not defined")
+movies["movie_info"] = movies["movie_info"].fillna(" ")
+
+test = movies.loc[movies["country"].isnull()]
+
+os.remove("dataset/Refined/final_movies.csv")
+movies.to_csv("dataset/Refined/final_movies.csv")
 
