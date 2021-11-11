@@ -11,5 +11,3 @@ clean: load
 load:
 	python3 src/load_data.py
 	
-clean:
-	rm -rf dev/*
