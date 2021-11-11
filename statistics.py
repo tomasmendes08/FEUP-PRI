@@ -12,11 +12,12 @@ import textwrap
 import spacy
 from wordcloud import WordCloud
 from spacy_langdetect import LanguageDetector
+from spacy.language import Language
 
 
-movies = pd.read_csv("../dataset/Refined/final_movies.csv")
-reviews = pd.read_csv("../dataset/Refined/rt_reviews.csv")
-ratings = pd.read_csv("../dataset/Refined/imdb_ratings.csv")
+movies = pd.read_csv("dataset/Refined/final_movies.csv")
+reviews = pd.read_csv("dataset/Refined/rt_reviews.csv")
+ratings = pd.read_csv("dataset/Refined/imdb_ratings.csv")
 
 # q25, q75 = np.percentile(movies["content_rating"], [0.25, 0.75])
 # bin_width = 2 * (q75 - q25) * len(movies) ** (-1/3)
@@ -225,7 +226,4 @@ ratings = pd.read_csv("../dataset/Refined/imdb_ratings.csv")
 # # sentence level language detection
 # for sent in doc.sents: # For each sentence
 #     print(sent, sent._.language)
-
-
-print("Make completed")
 

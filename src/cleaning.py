@@ -2,8 +2,8 @@ import os
 import pandas as pd
 
 
-movies = pd.read_csv("dataset/Refined/final_movies.csv")
-reviews = pd.read_csv("dataset/Refined/rt_reviews.csv")
+movies = pd.read_csv("../dataset/Refined/final_movies.csv")
+reviews = pd.read_csv("../dataset/Refined/rt_reviews.csv")
 # ratings = pd.read_csv("dataset/Refined/imdb_ratings.csv")
     
 movies.drop(columns=["writer", "authors", "year"], inplace=True)
@@ -19,9 +19,14 @@ movies["directors"] = movies["directors"].fillna("Unknown")
 test = movies.loc[movies["country"].isnull()]
 reviews.dropna(subset=["review_content"], inplace=True, how="all")
 
+#keep only 20 reviews (max) for each movie
 
-os.remove("dataset/Refined/final_movies.csv")
-movies.to_csv("dataset/Refined/final_movies.csv")
+reviews = reviews.groupby("rotten_tomatoes_link").tail(20)
 
-os.remove("dataset/Refined/rt_reviews.csv")
-reviews.to_csv("dataset/Refined/rt_reviews.csv")
+
+os.remove("../dataset/Refined/final_movies.csv")
+movies.to_csv("../dataset/Refined/final_movies.csv")
+
+os.remove("../dataset/Refined/rt_reviews.csv")
+reviews.to_csv("../dataset/Refined/rt_reviews.csv")
+

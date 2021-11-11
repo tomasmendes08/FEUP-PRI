@@ -1,7 +1,7 @@
 import pandas as pd
 
-df_reviews = pd.read_csv("dataset/RT/rotten_tomatoes_critic_reviews.csv")
-df_movies = pd.read_csv("dataset/RT/rotten_tomatoes_movies.csv")
+df_reviews = pd.read_csv("../dataset/RT/rotten_tomatoes_critic_reviews.csv")
+df_movies = pd.read_csv("../dataset/RT/rotten_tomatoes_movies.csv")
 
 
 def handle_year(x):
@@ -17,8 +17,8 @@ df_reviews.dropna(subset=["review_score", "critic_name"], inplace=True) # review
 
 # Read imdb dataset
 
-imdb_movies = pd.read_csv("dataset/IMDB/IMDb_movies.csv")
-imdb_ratings = pd.read_csv("dataset/IMDB/IMDb_ratings.csv")
+imdb_movies = pd.read_csv("../dataset/IMDB/IMDb_movies.csv")
+imdb_ratings = pd.read_csv("../dataset/IMDB/IMDb_ratings.csv")
 
 
 release_dates = df_movies["original_release_date"]
@@ -47,7 +47,7 @@ final_movies = pd.merge(final_movies, imdb_ratings, how="inner", on="imdb_title_
 
 # Writes clean data to csv
 
-imdb_ratings.to_csv("dataset/Refined/imdb_ratings.csv")
-df_reviews.to_csv("dataset/Refined/rt_reviews.csv")
-final_movies.to_csv("dataset/Refined/final_movies.csv")
+imdb_ratings.to_csv("../dataset/Refined/imdb_ratings.csv")
+df_reviews.to_csv("../dataset/Refined/rt_reviews.csv")
+final_movies.to_csv("../dataset/Refined/final_movies.csv")
 
