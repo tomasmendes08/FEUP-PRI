@@ -33,8 +33,8 @@ df_movies.drop(columns=["actors", "production_company"], inplace=True)
 imdb_movies["year"] = imdb_movies["year"].map(lambda x: handle_year(x))
 
 final_movies = pd.merge(imdb_movies, df_movies, left_on =["original_title", "year"], right_on = ["movie_title" ,"release_year"])
-# dispose redundant data
 
+# dispose redundant data
 final_movies.drop(columns=["movie_title", "release_year", "genre", "description", "duration", "director"], inplace=True)
 
 all_rt_movies = final_movies["rotten_tomatoes_link"].to_numpy()
