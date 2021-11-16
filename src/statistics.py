@@ -29,9 +29,10 @@ ratings = pd.read_csv("../dataset/Refined/imdb_ratings.csv")
 # sb.set_theme(style="darkgrid")
 # sb.set(rc={'figure.figsize':(14,8)})
 # fig = sb.histplot(movies["content_rating"], shrink = 0.5)
-# plt.title("Distribution of Movie Ratings")
-# plt.xlabel("Content Rating")
-# plt.savefig("statistics/content_rating_hist.png")
+# plt.title("Distribution of Movie Ratings",fontdict={'fontsize': 20, 'fontweight': 'bold'})
+# plt.xlabel("Content Rating", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# plt.ylabel("Count", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# plt.savefig("../statistics/content_rating_hist.png")
 # plt.show()
 
 
@@ -56,11 +57,17 @@ ratings = pd.read_csv("../dataset/Refined/imdb_ratings.csv")
     YEAR HISTOGRAPH
 """
 
+# years = [x.split("-")[0] for x in movies["original_release_date"]]
+
 # fig1, ax1 = plt.subplots()
 # plt.title("Year distribution of movies")
-# ax1 = sb.histplot(movies["year"])
+# ax1 = sb.histplot(np.array(years), kde=True)
 # ax1.set_title("Distribution of Movie's release years", fontdict={'fontsize': 20, 'fontweight': 'bold'})
-# plt.savefig("statistics/year_graph.png")
+# plt.xlabel("Year", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# plt.ylabel("Number of released movies", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# start, end = ax1.get_xlim()
+# ax1.xaxis.set_ticks(np.array([2,  20,  43,  64,  85, 102]))
+# plt.savefig("../statistics/year_graph.png")
 # plt.show()
 
 
@@ -71,31 +78,32 @@ ratings = pd.read_csv("../dataset/Refined/imdb_ratings.csv")
 # single_list = []
 
 # for country in movies["country"]:
-#     countries = country.split(",")
+#     countries = country.split(", ")
 #     single_list += countries
 
 # occurrences = {x: single_list.count(x) for x in list(set(single_list))}
 
 
 
-# countries = sorted(list(occurrences.keys()), key=lambda x: occurrences[x], reverse = True)[:20]
+# countries = sorted(list(occurrences.keys()), key=lambda x: occurrences[x], reverse = True)[:15]
 # nums = [occurrences[x] for x in countries]    
 
 # fig1, ax1 = plt.subplots()
 
 # sb.set_theme(style="darkgrid")
-# sb.set(rc={'figure.figsize':(20,8)})
-# fig = plt.bar(countries, nums)
+# sb.set(rc={'figure.figsize':(15,20)})
+# fig = plt.barh(countries, nums)
 
 # cnt = -1.2
 # for country in countries:
 #     cnt += 1
-#     ax1.text(x=cnt, y=min(occurrences[country] * 1.1, 7200), s=str(occurrences[country]), fontdict={'fontsize': 11, 'fontweight': 'bold'})
+#     ax1.text(y=cnt, x=min(occurrences[country] * 1.1, 8200), s=str(occurrences[country]), fontdict={'fontsize': 11, 'fontweight': 'bold'})
     
     
-# plt.title("Distribution of Movie Ratings")
-# plt.xlabel("Country")
-# plt.savefig("statistics/content_rating_year.png")
+# plt.title("Distribution of Movie's Countries", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# plt.xlabel("Country", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# plt.ylabel("Count", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# plt.savefig("../statistics/content_rating_year.png")
 # plt.show()
 
 
@@ -104,11 +112,26 @@ ratings = pd.read_csv("../dataset/Refined/imdb_ratings.csv")
 """
 
 # fig1, ax1 = plt.subplots()
-# plt.title("IMDB Ratings distribution")
+# plt.title("IMDB Ratings distribution", fontdict={'fontsize': 15, 'fontweight': 'bold'})
 # plt.xlabel("Average vote", fontdict={'fontsize': 15, 'fontweight': 'bold'})
-# ax1 = sb.histplot(movies["avg_vote"], kde=True, legend=False)
+# plt.ylabel("Count", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# ax1 = sb.histplot(movies["mean_vote"], kde=True, legend=False)
 # ax1.set_title("Distribution of Movie's IMDB ratings", fontdict={'fontsize': 20, 'fontweight': 'bold'})
-# plt.savefig("statistics/ratings.png")
+# plt.savefig("../statistics/ratings.png")
+# plt.show()
+
+
+"""
+    RT RATINGS DISTRIBUTION
+"""
+
+# fig1, ax1 = plt.subplots()
+# plt.title("IMDB Ratings distribution", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# plt.xlabel("Average vote", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# plt.ylabel("Count", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# ax1 = sb.histplot(movies["audience_rating"], kde=True, legend=False)
+# ax1.set_title("Distribution of Movie's Audience ratings", fontdict={'fontsize': 20, 'fontweight': 'bold'})
+# plt.savefig("../statistics/audience_ratings.png")
 # plt.show()
 
 
@@ -118,16 +141,41 @@ ratings = pd.read_csv("../dataset/Refined/imdb_ratings.csv")
 
 # reviews_count = reviews["rotten_tomatoes_link"].value_counts().to_dict()
 
-# reviews_count = movies["votes"].value_counts()
+# reviews_count = movies["total_votes"].value_counts()
 
 
 # fig1, ax1 = plt.subplots()
 # plt.title("IMDB Ratings per Movie")
 # plt.xlabel("Reviews", fontdict={'fontsize': 15, 'fontweight': 'bold'})
-# ax1 = sb.histplot(movies["votes"])
+# ax1 = sb.histplot(movies["total_votes"])
 # ax1.set_title("Distribution of Movie's Ratings", fontdict={'fontsize': 20, 'fontweight': 'bold'})
 # # plt.savefig("statistics/ratings.png")
 # plt.show()
+
+"""
+    REVIEWS PER MOVIE
+"""
+
+
+"""
+    RATINGS LINEAR REGRESSION 
+"""
+
+
+
+# reviews_count = reviews["rotten_tomatoes_link"].value_counts().to_dict()
+
+# reviews_count = movies["mean_vote"].value_counts()
+
+# sb.set(rc={'figure.figsize':(14,8)})
+# fig1, ax1 = plt.subplots()
+# plt.title("IMDB Ratings per Movie")
+# plt.xlabel("Reviews", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# ax1 = sb.histplot(reviews_count)
+# ax1.set_title("Distribution of Movie's Ratings", fontdict={'fontsize': 20, 'fontweight': 'bold'})
+# # plt.savefig("statistics/ratings.png")
+# plt.show()
+
 
 
 
@@ -190,15 +238,29 @@ ratings = pd.read_csv("../dataset/Refined/imdb_ratings.csv")
 
 
 """
-    GENERATE WORDCLOUD
+    GENERATE MOVIE DESCRIPTION WORDCLOUD
 """
 
 # text = " ".join(movies["movie_info"])
 # wordcloud = WordCloud(max_font_size=50, max_words=100, background_color="white").generate(text)
 # plt.imshow(wordcloud, interpolation="bilinear")
-# plt.title("Description Wordcloud", fontdict={'fontsize': 100, 'fontweight': 'bold'})
+# # plt.title("Description Wordcloud", fontdict={'fontsize': 50, 'fontweight': 'bold'})
 # plt.axis("off")
-# plt.savefig("statistics/description_wordcloud.png")
+# plt.savefig("../statistics/description_wordcloud.png")
+# plt.show()
+
+
+
+"""
+    GENERATE MOVIE DESCRIPTION WORDCLOUD
+"""
+
+# text = " ".join(movies["movie_info"])
+# wordcloud = WordCloud(max_font_size=50, max_words=100, background_color="white").generate(text)
+# plt.imshow(wordcloud, interpolation="bilinear")
+# # plt.title("Description Wordcloud", fontdict={'fontsize': 50, 'fontweight': 'bold'})
+# plt.axis("off")
+# plt.savefig("../statistics/description_wordcloud.png")
 # plt.show()
 
 
@@ -227,5 +289,5 @@ ratings = pd.read_csv("../dataset/Refined/imdb_ratings.csv")
 #     print(sent, sent._.language)
 
 
-print("Make completed")
+# print("Make completed")
 
