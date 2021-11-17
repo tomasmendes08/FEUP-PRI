@@ -2,7 +2,10 @@ SHELL := bash
 
 default: statistics
 
-statistics: clean
+statistics: platforms
+	python3 platforms.py
+
+platforms: clean
 	python3 statistics.py
 	
 clean: load

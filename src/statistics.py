@@ -12,11 +12,13 @@ import textwrap
 import spacy
 from wordcloud import WordCloud
 from spacy_langdetect import LanguageDetector
+from platforms import movies as movies
+from cleaning import reviews as reviews
 
 
-movies = pd.read_csv("../dataset/Refined/final_movies.csv")
-reviews = pd.read_csv("../dataset/Refined/rt_reviews.csv")
-ratings = pd.read_csv("../dataset/Refined/imdb_ratings.csv")
+# movies = pd.read_csv("../dataset/Refined/final_movies.csv")
+# reviews = pd.read_csv("../dataset/Refined/rt_reviews.csv")
+# ratings = pd.read_csv("../dataset/Refined/imdb_ratings.csv")
 
 # q25, q75 = np.percentile(movies["content_rating"], [0.25, 0.75])
 # bin_width = 2 * (q75 - q25) * len(movies) ** (-1/3)
@@ -262,6 +264,21 @@ ratings = pd.read_csv("../dataset/Refined/imdb_ratings.csv")
 # plt.axis("off")
 # plt.savefig("../statistics/description_wordcloud.png")
 # plt.show()
+
+
+"""
+    PLATFORM MOVIES
+"""
+
+platforms = ["Netflix", "Prime Video", "Disney+"]
+
+availability = [len(movies.loc[movies[x] == True]) for x in movies.columns[-3:]]
+plt.title("Platforms Distribution", fontdict={'fontsize': 20, 'fontweight': 'bold'})
+# plt.xlabel("Platforms", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+plt.ylabel("Available movies", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+plt.bar(platforms, availability)
+plt.savefig("../statistics/platforms.png")
+plt.show()
 
 
 """
