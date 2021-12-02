@@ -6,7 +6,7 @@
             "indexAnalyzer":{
                 "tokenizer":{
                     "class":"solr.PatternTokenizerFactory",
-					"pattern":", "
+					"pattern":",*\\s+"
                 },
                 "filters":[
                     {"class":"solr.LowerCaseFilterFactory"}
@@ -15,7 +15,7 @@
             "queryAnalyzer":{
                 "tokenizer":{
                     "class":"solr.PatternTokenizerFactory",
-					"pattern":", "
+					"pattern":",*\\s+"
                 },
                 "filters":[
                     {"class":"solr.LowerCaseFilterFactory"}
@@ -27,6 +27,14 @@
 	"add-field": [
         {
             "name": "actors",
+            "type": "separate_commas",
+            "indexed": true
+        }
+    ],
+	
+	"add-field": [
+        {
+            "name": "writer",
             "type": "separate_commas",
             "indexed": true
         }
