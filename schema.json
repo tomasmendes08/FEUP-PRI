@@ -1,0 +1,34 @@
+{
+	"add-field-type": [
+        {
+            "name":"separate_commas",
+            "class":"solr.TextField",
+            "indexAnalyzer":{
+                "tokenizer":{
+                    "class":"solr.PatternTokenizerFactory",
+					"pattern":", "
+                },
+                "filters":[
+                    {"class":"solr.LowerCaseFilterFactory"}
+                ]
+            },
+            "queryAnalyzer":{
+                "tokenizer":{
+                    "class":"solr.PatternTokenizerFactory",
+					"pattern":", "
+                },
+                "filters":[
+                    {"class":"solr.LowerCaseFilterFactory"}
+                ]
+            }
+        }
+    ],
+
+	"add-field": [
+        {
+            "name": "actors",
+            "type": "separate_commas",
+            "indexed": true
+        }
+    ]
+}

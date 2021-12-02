@@ -9,23 +9,23 @@ from load_data import df_reviews as reviews, final_movies as movies
 
 # drop_cols = "allgenders_0age_votes", "allgenders_0age_avg_vote", "allgenders_18age_avg_vote", "allgenders_18age_votes", "allgenders_30age_avg_vote", "allgenders_30age_votes", "allgenders_45age_avg_vote", "allgenders_45age_votes", "males_0age_avg_vote", "males_0age_votes", "males_18age_avg_vote", "males_18age_votes", "males_30age_avg_vote", "males_30age_votes", "males_45age_avg_vote", "males_45age_votes", "females_0age_avg_vote", "females_0age_votes", "females_18age_avg_vote", "females_18age_votes", "females_30age_avg_vote", "females_30age_votes", "females_45age_avg_vote", "females_45age_votes"
 #fill null values
-movies["country"] = movies["country"].fillna("None")
-movies["genres"] = movies["genres"].fillna("Not defined")
-movies["movie_info"] = movies["movie_info"].fillna(" ")
-movies["audience_rating"] = movies["audience_rating"].fillna("Insuficient votes")
-movies["allgenders_0age_avg_vote"] = movies["allgenders_0age_avg_vote"].fillna("No votes")
-movies["allgenders_0age_votes"] = movies["allgenders_0age_votes"].fillna("No votes")
-movies["allgenders_18age_avg_vote"] = movies["allgenders_18age_avg_vote"].fillna("No votes")
-movies["allgenders_18age_votes"] = movies["allgenders_18age_votes"].fillna("No votes")
+# movies["country"] = movies["country"].fillna("None")
+# movies["genres"] = movies["genres"].fillna("Not defined")
+# movies["movie_info"] = movies["movie_info"].fillna(" ")
+# movies["audience_rating"] = movies["audience_rating"].fillna("Insuficient votes")
+# movies["allgenders_0age_avg_vote"] = movies["allgenders_0age_avg_vote"].fillna("No votes")
+# movies["allgenders_0age_votes"] = movies["allgenders_0age_votes"].fillna("No votes")
+# movies["allgenders_18age_avg_vote"] = movies["allgenders_18age_avg_vote"].fillna("No votes")
+# movies["allgenders_18age_votes"] = movies["allgenders_18age_votes"].fillna("No votes")
 
-movies["directors"] = movies["directors"].fillna("Unknown")
-movies["budget"] = movies["budget"].fillna("Unknown")
-movies["worlwide_gross_income"] = movies["worlwide_gross_income"].fillna("Unknown")
-movies["streaming_release_date"] = movies["streaming_release_date"].fillna("Unknown")
-movies["production_company"] = movies["production_company"].fillna("Unknown")
-movies["writer"] = movies["writer"].fillna("Unknown")
-movies["actors"] = movies["actors"].fillna("Unknown")
-movies["runtime"] = movies["runtime"].fillna("Not defined")
+# movies["directors"] = movies["directors"].fillna("Unknown")
+# movies["budget"] = movies["budget"].fillna("Unknown")
+# movies["worlwide_gross_income"] = movies["worlwide_gross_income"].fillna("Unknown")
+# movies["streaming_release_date"] = movies["streaming_release_date"].fillna("Unknown")
+# movies["production_company"] = movies["production_company"].fillna("Unknown")
+# movies["writer"] = movies["writer"].fillna("Unknown")
+# movies["actors"] = movies["actors"].fillna("Unknown")
+# movies["runtime"] = movies["runtime"].fillna("Not defined")
 
 #updated movie country
 movies.at[6389, 'country'] = 'USA'
