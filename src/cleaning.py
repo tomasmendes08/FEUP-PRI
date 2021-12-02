@@ -84,8 +84,15 @@ movies = movies[["imdb_title_id", "rotten_tomatoes_link", "original_title", "ori
 reviews.dropna(subset=["review_content"], inplace=True, how="all")
 reviews.drop(columns=["review_type"], inplace=True)
 
-#keep only 20 reviews (max) for each movie
-reviews = reviews.groupby("rotten_tomatoes_link").tail(20)
+# keep only 20 reviews (max) for each movie
+# def choose_critics(x):
+reviews_len = [len(x) for x in reviews["review_content"]]
+reviews["tmp_len"] = reviews_len
+
+# reviews = reviews.groupby("rotten_tomatoes_link").tail(20)
+reviews = reviews.sort_values(by=["rotten_tomatoes_link", "top_critic", "tmp_len"], ascending=False).groupby("rotten_tomatoes_link").tail(20)
+reviews.drop(columns=["tmp_len"], inplace=True)
+# reviews = reviews.iloc[::-1]
 
 os.remove("../dataset/Refined/final_movies.csv")
 movies.to_csv("../dataset/Refined/final_movies.csv")

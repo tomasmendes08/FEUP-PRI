@@ -270,15 +270,15 @@ from cleaning import reviews as reviews
     PLATFORM MOVIES
 """
 
-platforms = ["Netflix", "Prime Video", "Disney+"]
+# platforms = ["Netflix", "Prime Video", "Disney+"]
 
-availability = [len(movies.loc[movies[x] == True]) for x in movies.columns[-3:]]
-plt.title("Platforms Distribution", fontdict={'fontsize': 20, 'fontweight': 'bold'})
-# plt.xlabel("Platforms", fontdict={'fontsize': 15, 'fontweight': 'bold'})
-plt.ylabel("Available movies", fontdict={'fontsize': 15, 'fontweight': 'bold'})
-plt.bar(platforms, availability)
-plt.savefig("../statistics/platforms.png")
-plt.show()
+# availability = [len(movies.loc[movies[x] == True]) for x in movies.columns[-3:]]
+# plt.title("Platforms Distribution", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# # plt.xlabel("Platforms", fontdict={'fontsize': 15, 'fontweight': 'bold'})
+# plt.ylabel("Available movies", fontdict={'fontsize': 10, 'fontweight': 'bold'})
+# plt.bar(platforms, availability)
+# plt.savefig("../statistics/platforms.png")
+# plt.show()
 
 
 """
