@@ -1,42 +1,133 @@
 {
 	"add-field-type": [
         {
-            "name":"separate_commas",
+            "name":"standard",
             "class":"solr.TextField",
             "indexAnalyzer":{
                 "tokenizer":{
-                    "class":"solr.PatternTokenizerFactory",
-					"pattern":",*\\s+"
+                    "class":"solr.StandardTokenizerFactory"
                 },
                 "filters":[
+                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
                     {"class":"solr.LowerCaseFilterFactory"}
                 ]
             },
             "queryAnalyzer":{
                 "tokenizer":{
-                    "class":"solr.PatternTokenizerFactory",
-					"pattern":",*\\s+"
+                    "class":"solr.StandardTokenizerFactory"
                 },
                 "filters":[
+                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
                     {"class":"solr.LowerCaseFilterFactory"}
                 ]
             }
+        },
+
+        {
+            "name":"get_number",
+            "class":"solr.TextField",
+            "indexAnalyzer":{
+                "tokenizer":{
+                    "class":"solr.SimplePatternTokenizerFactory",
+					"pattern":"[0-9]+"
+                },
+                "filters":[
+                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
+                    {"class":"solr.LowerCaseFilterFactory"}
+                ]
+            },
+            "queryAnalyzer":{
+                "tokenizer":{
+                    "class":"solr.SimplePatternTokenizerFactory",
+					"pattern":"[0-9]+"
+                },
+                "filters":[
+                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
+                    {"class":"solr.LowerCaseFilterFactory"}
+                ]
+            }
+        }
+        
+    ],
+    
+    "add-field": [
+        {
+            "name": "original_title",
+            "type": "standard",
+            "indexed": true
+        }
+    ],
+
+    "add-field": [
+        {
+            "name": "country",
+            "type": "standard",
+            "indexed": true
+        }
+    ],
+
+    "add-field": [
+        {
+            "name": "language",
+            "type": "standard",
+            "indexed": true
+        }
+    ],
+
+    "add-field": [
+        {
+            "name": "production_company",
+            "type": "standard",
+            "indexed": true
+        }
+    ],
+
+    "add-field": [
+        {
+            "name": "directors",
+            "type": "standard",
+            "indexed": true
+        }
+    ],
+    
+    "add-field": [
+        {
+            "name": "writer",
+            "type": "standard",
+            "indexed": true
         }
     ],
 
 	"add-field": [
         {
             "name": "actors",
-            "type": "separate_commas",
+            "type": "standard",
+            "indexed": true
+        }
+    ],
+
+    "add-field": [
+        {
+            "name": "budget",
+            "type": "get_number",
+            "indexed": true
+        }
+    ],
+
+    "add-field": [
+        {
+            "name": "worlwide_gross_income",
+            "type": "get_number",
             "indexed": true
         }
     ],
 	
-	"add-field": [
+    "add-field": [
         {
-            "name": "writer",
-            "type": "separate_commas",
+            "name": "genres",
+            "type": "standard",
             "indexed": true
         }
     ]
+
 }
