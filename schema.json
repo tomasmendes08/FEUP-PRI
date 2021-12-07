@@ -228,7 +228,38 @@
             "name": "available_disney_",
             "type": "standard_text",
             "indexed": true
+        },
+        {
+            "name": "critic_name",
+            "type": "standard_text",
+            "indexed": true
+        },
+        {
+            "name": "top_critic",
+            "type": "standard_text",
+            "indexed": true
+        },
+        {
+            "name": "publisher_name",
+            "type": "standard_text",
+            "indexed": true
+        },
+        {
+            "name": "review_score",
+            "type": "standard_text",
+            "indexed": true
+        },
+        {
+            "name": "review_date",
+            "type": "standard_digits",
+            "indexed": true
+        },
+        {
+            "name": "review_content",
+            "type": "standard_text",
+            "indexed": true
         }
+
 
     ]
 

@@ -1,6 +1,5 @@
 import os
-import pandas as pd
-import numpy as np
+
 from load_data import df_reviews as reviews, final_movies as movies
 
 
@@ -87,7 +86,7 @@ movies = movies[["imdb_title_id", "rotten_tomatoes_link", "original_title", "ori
 
 #reviews
 reviews.dropna(subset=["review_content"], inplace=True, how="all")
-reviews.drop(columns=["review_type"], inplace=True)
+# reviews.drop(columns=["review_type"], inplace=True)
 
 # keep only 20 reviews (max) for each movie
 # def choose_critics(x):
