@@ -11,7 +11,7 @@ from load_data import df_reviews as reviews, final_movies as movies
 #fill null values
 # movies["country"] = movies["country"].fillna("None")
 # movies["genres"] = movies["genres"].fillna("Not defined")
-# movies["movie_info"] = movies["movie_info"].fillna(" ")
+# movies["movie_info"] = movies["movie_info"].fillna("Not defined")
 # movies["audience_rating"] = movies["audience_rating"].fillna("Insuficient votes")
 # movies["allgenders_0age_avg_vote"] = movies["allgenders_0age_avg_vote"].fillna("No votes")
 # movies["allgenders_0age_votes"] = movies["allgenders_0age_votes"].fillna("No votes")
@@ -25,7 +25,12 @@ from load_data import df_reviews as reviews, final_movies as movies
 # movies["production_company"] = movies["production_company"].fillna("Unknown")
 # movies["writer"] = movies["writer"].fillna("Unknown")
 # movies["actors"] = movies["actors"].fillna("Unknown")
-# movies["runtime"] = movies["runtime"].fillna("Not defined")
+movies["runtime"] = movies["runtime"].fillna(0)
+movies['runtime'] = movies['runtime'].astype('int64')
+movies["audience_rating"] = movies["audience_rating"].fillna(0)
+movies['audience_rating'] = movies["audience_rating"].astype('int64')
+movies["tomatometer_rating"] = movies["tomatometer_rating"].fillna(0)
+movies['tomatometer_rating'] = movies["tomatometer_rating"].astype('int64')
 
 #updated movie country
 movies.at[6389, 'country'] = 'USA'

@@ -1,7 +1,7 @@
 {
 	"add-field-type": [
         {
-            "name":"standard",
+            "name":"standard_text",
             "class":"solr.TextField",
             "indexAnalyzer":{
                 "tokenizer":{
@@ -24,27 +24,34 @@
         },
 
         {
-            "name":"get_number",
+            "name":"standard_digits",
+            "class":"solr.TextField",
+            "indexAnalyzer":{
+                "tokenizer":{
+                    "class":"solr.StandardTokenizerFactory"
+                }
+            },
+            "queryAnalyzer":{
+                "tokenizer":{
+                    "class":"solr.StandardTokenizerFactory"
+                }
+            }
+        },
+
+        {
+            "name":"get_number_only",
             "class":"solr.TextField",
             "indexAnalyzer":{
                 "tokenizer":{
                     "class":"solr.SimplePatternTokenizerFactory",
 					"pattern":"[0-9]+"
-                },
-                "filters":[
-                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
-                    {"class":"solr.LowerCaseFilterFactory"}
-                ]
+                }
             },
             "queryAnalyzer":{
                 "tokenizer":{
                     "class":"solr.SimplePatternTokenizerFactory",
 					"pattern":"[0-9]+"
-                },
-                "filters":[
-                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
-                    {"class":"solr.LowerCaseFilterFactory"}
-                ]
+                }
             }
         }
         
@@ -52,82 +59,177 @@
     
     "add-field": [
         {
+            "name": "imdb_title_id",
+            "type": "standard_text",
+            "indexed": false
+        },
+        {
+            "name": "rotten_tomatoes_link",
+            "type": "standard_text",
+            "indexed": false
+        },
+        {
             "name": "original_title",
-            "type": "standard",
+            "type": "standard_text",
             "indexed": true
-        }
-    ],
-
-    "add-field": [
+        },
+        {
+            "name": "original_release_date",
+            "type": "standard_digits",
+            "indexed": true
+        },
+        {
+            "name": "streaming_release_date",
+            "type": "standard_digits",
+            "indexed": true
+        },
         {
             "name": "country",
-            "type": "standard",
+            "type": "standard_text",
             "indexed": true
-        }
-    ],
-
-    "add-field": [
+        },
         {
             "name": "language",
-            "type": "standard",
+            "type": "standard_text",
             "indexed": true
-        }
-    ],
-
-    "add-field": [
+        },
         {
             "name": "production_company",
-            "type": "standard",
+            "type": "standard_text",
             "indexed": true
-        }
-    ],
-
-    "add-field": [
+        },
         {
             "name": "directors",
-            "type": "standard",
+            "type": "standard_text",
             "indexed": true
-        }
-    ],
-    
-    "add-field": [
+        },
         {
             "name": "writer",
-            "type": "standard",
+            "type": "standard_text",
             "indexed": true
-        }
-    ],
-
-	"add-field": [
+        },
         {
             "name": "actors",
-            "type": "standard",
+            "type": "standard_text",
             "indexed": true
-        }
-    ],
-
-    "add-field": [
+        },
         {
             "name": "budget",
-            "type": "get_number",
+            "type": "get_number_only",
             "indexed": true
-        }
-    ],
-
-    "add-field": [
+        },
         {
             "name": "worlwide_gross_income",
-            "type": "get_number",
+            "type": "get_number_only",
             "indexed": true
-        }
-    ],
-	
-    "add-field": [
+        },
         {
             "name": "genres",
-            "type": "standard",
+            "type": "standard_text",
+            "indexed": true
+        },
+        {
+            "name": "content_rating",
+            "type": "standard_text",
+            "indexed": true
+        },
+        {
+            "name": "runtime",
+            "type": "standard_digits",
+            "indexed": true
+        },
+        {
+            "name": "movie_info",
+            "type": "standard_text",
+            "indexed": true
+        },
+        {
+            "name": "audience_rating",
+            "type": "standard_digits",
+            "indexed": true
+        },
+        {
+            "name": "tomatometer_rating",
+            "type": "standard_digits",
+            "indexed": true
+        },
+        {
+            "name": "total_votes",
+            "type": "standard_digits",
+            "indexed": true
+        },
+        {
+            "name": "mean_vote",
+            "type": "standard_digits",
+            "indexed": true
+        },
+        {
+            "name": "votes_10",
+            "type": "standard_digits",
+            "indexed": false
+        },
+        {
+            "name": "votes_9",
+            "type": "standard_digits",
+            "indexed": false
+        },
+        {
+            "name": "votes_8",
+            "type": "standard_digits",
+            "indexed": false
+        },
+        {
+            "name": "votes_7",
+            "type": "standard_digits",
+            "indexed": false
+        },
+        {
+            "name": "votes_6",
+            "type": "standard_digits",
+            "indexed": false
+        },
+
+        {
+            "name": "votes_5",
+            "type": "standard_digits",
+            "indexed": false
+        },
+        {
+            "name": "votes_4",
+            "type": "standard_digits",
+            "indexed": false
+        },
+        {
+            "name": "votes_3",
+            "type": "standard_digits",
+            "indexed": false
+        },
+        {
+            "name": "votes_2",
+            "type": "standard_digits",
+            "indexed": false
+        },
+        {
+            "name": "votes_1",
+            "type": "standard_digits",
+            "indexed": false
+        },
+        {
+            "name": "available_netflix",
+            "type": "standard_text",
+            "indexed": true
+        },
+        {
+            "name": "available_prime_video",
+            "type": "standard_text",
+            "indexed": true
+        },
+        {
+            "name": "available_disney_",
+            "type": "standard_text",
             "indexed": true
         }
+
     ]
 
 }
