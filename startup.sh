@@ -16,7 +16,7 @@ curl -X POST -H 'Content-type:application/json' \
 # bin/post -c movies /data/movies.csv
 curl -X POST -H 'Content-type:application/json' \
     --data-binary @/data/data.json \
-    'http://localhost:8983/solr/movies/update/json/docs?split=/reviews'
+    'http://localhost:8983/solr/movies/update/json/docs?split=/|/reviews'
 
 # Restart in foreground mode so we can access the interface
 solr restart -f
