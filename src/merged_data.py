@@ -14,9 +14,7 @@ final_movies_df = pd.read_csv("../dataset/Refined/final_movies.csv")
 reviews = reviews_df.to_dict(orient='records')
 final_movies = final_movies_df.to_dict(orient='records')
 
-id = 0
-for x in final_movies:
-    
+for x in final_movies:    
     x['reviews'] = []
     for y in reviews:
         if y['rotten_tomatoes_link'] == x['rotten_tomatoes_link']:

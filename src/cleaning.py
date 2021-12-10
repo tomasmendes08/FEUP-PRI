@@ -24,6 +24,8 @@ from load_data import df_reviews as reviews, final_movies as movies
 # movies["production_company"] = movies["production_company"].fillna("Unknown")
 # movies["writer"] = movies["writer"].fillna("Unknown")
 # movies["actors"] = movies["actors"].fillna("Unknown")
+movies = movies.rename(columns={'mean_vote': 'mean_vote_imdb'})
+
 movies["runtime"] = movies["runtime"].fillna(0)
 movies['runtime'] = movies['runtime'].astype('int64')
 movies["audience_rating"] = movies["audience_rating"].fillna(0)
@@ -73,7 +75,7 @@ movies.at[8921, 'language'] = 'English'
 movies.at[9005, 'language'] = 'English'
 
 #adjusting movies columns order
-movies = movies[["imdb_title_id", "rotten_tomatoes_link", "original_title", "original_release_date", "streaming_release_date", "country", "language", "production_company", "directors", "writer", "actors", "budget", "worlwide_gross_income", "genres", "content_rating", "runtime", "movie_info", "audience_rating", "tomatometer_rating", "total_votes", "mean_vote", "votes_10", "votes_9", "votes_8", "votes_7", "votes_6", "votes_5", "votes_4", "votes_3", "votes_2", "votes_1"]]
+movies = movies[["imdb_title_id", "rotten_tomatoes_link", "original_title", "original_release_date", "streaming_release_date", "country", "language", "production_company", "directors", "writer", "actors", "budget", "worlwide_gross_income", "genres", "content_rating", "runtime", "movie_info", "audience_rating", "tomatometer_rating", "total_votes", "mean_vote_imdb", "votes_10", "votes_9", "votes_8", "votes_7", "votes_6", "votes_5", "votes_4", "votes_3", "votes_2", "votes_1"]]
 
 #comparar colunas
 #movies['is_score_chased'] = np.where(movies['date_published']==movies['original_release_date'], 
@@ -86,7 +88,6 @@ movies = movies[["imdb_title_id", "rotten_tomatoes_link", "original_title", "ori
 
 #reviews
 reviews.dropna(subset=["review_content"], inplace=True, how="all")
-# reviews.drop(columns=["review_type"], inplace=True)
 
 # keep only 20 reviews (max) for each movie
 # def choose_critics(x):
@@ -95,8 +96,29 @@ reviews["tmp_len"] = reviews_len
 
 # reviews = reviews.groupby("rotten_tomatoes_link").tail(20)
 reviews = reviews.sort_values(by=["rotten_tomatoes_link", "top_critic", "tmp_len"], ascending=False).groupby("rotten_tomatoes_link").tail(20)
-reviews.drop(columns=["tmp_len"], inplace=True)
+reviews.drop(columns=["tmp_len", "review_type"], inplace=True)
 # reviews = reviews.iloc[::-1]
+
+lista = []
+letters_dict = {'A+':9.5, 'A':9.0, 'A-':8.5, 'B+':8.0, 'B':7.5, 'B-':7.0, 'C+':6.5, 'C':6.0, 'C-':5.5, 'C  -':5.5, 'D+': 5.0, 'D': 4.5, 'D-':4.0, 'E':3.0, 'F':2.0}
+for x in reviews["review_score"]:
+    aux = x.split('/')
+    if len(aux) == 2:
+        if float(aux[1]) == 0.0: aux[1] = 10
+        score = 10.0*float(aux[0])/float(aux[1]) 
+        lista.append(score)
+    elif aux[0].isnumeric():
+        if float(aux[0]) > 5:
+            lista.append(float(aux[0]))
+        else:
+            score = 2.0*float(aux[0])
+            lista.append(score)
+    else:
+        lista.append(letters_dict[aux[0]])
+        # stripped = aux[0].replace(" ", "")
+    
+reviews["review_score_normalized"] = lista
+reviews.drop(columns=["review_score"], inplace = True)
 
 os.remove("../dataset/Refined/final_movies.csv")
 movies.to_csv("../dataset/Refined/final_movies.csv")

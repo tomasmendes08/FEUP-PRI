@@ -41,6 +41,8 @@ all_rt_movies = final_movies["rotten_tomatoes_link"].to_numpy()
 all_imdb_movies = final_movies["imdb_title_id"].to_numpy()
 
 df_reviews = df_reviews[df_reviews["rotten_tomatoes_link"].isin(all_rt_movies)]
+df_reviews.drop_duplicates(subset=["rotten_tomatoes_link", "critic_name"], keep='first', inplace=True)
+
 imdb_ratings = imdb_ratings[imdb_ratings["imdb_title_id"].isin(all_imdb_movies)]
 
 final_movies = pd.merge(final_movies, imdb_ratings, how="inner", on="imdb_title_id")

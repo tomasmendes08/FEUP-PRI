@@ -117,7 +117,7 @@ from cleaning import reviews as reviews
 # plt.title("IMDB Ratings distribution", fontdict={'fontsize': 15, 'fontweight': 'bold'})
 # plt.xlabel("Average vote", fontdict={'fontsize': 15, 'fontweight': 'bold'})
 # plt.ylabel("Count", fontdict={'fontsize': 15, 'fontweight': 'bold'})
-# ax1 = sb.histplot(movies["mean_vote"], kde=True, legend=False)
+# ax1 = sb.histplot(movies["mean_vote_imdb"], kde=True, legend=False)
 # ax1.set_title("Distribution of Movie's IMDB ratings", fontdict={'fontsize': 20, 'fontweight': 'bold'})
 # plt.savefig("../statistics/ratings.png")
 # plt.show()
@@ -167,7 +167,7 @@ from cleaning import reviews as reviews
 
 # reviews_count = reviews["rotten_tomatoes_link"].value_counts().to_dict()
 
-# reviews_count = movies["mean_vote"].value_counts()
+# reviews_count = movies["mean_vote_imdb"].value_counts()
 
 # sb.set(rc={'figure.figsize':(14,8)})
 # fig1, ax1 = plt.subplots()

@@ -159,7 +159,7 @@
             "indexed": true
         },
         {
-            "name": "mean_vote",
+            "name": "mean_vote_imdb",
             "type": "standard_digits",
             "indexed": true
         },
@@ -245,8 +245,8 @@
             "indexed": true
         },
         {
-            "name": "review_score",
-            "type": "standard_text",
+            "name": "review_score_normalized",
+            "type": "standard_digits",
             "indexed": true
         },
         {

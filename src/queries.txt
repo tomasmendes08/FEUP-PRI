@@ -5,4 +5,7 @@ review_content: "superhero" OR
 review_content: "supervillain"
 
 
-//
+//films directed by martin scorsese, featuring robert de niro and acclaimed by the critics
+directors: "Martin Scorsese" AND
+actors: "Robert De Niro" AND  
+tomatometer_rating: [80 TO 100]
