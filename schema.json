@@ -24,21 +24,6 @@
         },
 
         {
-            "name":"standard_digits",
-            "class":"solr.TextField",
-            "indexAnalyzer":{
-                "tokenizer":{
-                    "class":"solr.StandardTokenizerFactory"
-                }
-            },
-            "queryAnalyzer":{
-                "tokenizer":{
-                    "class":"solr.StandardTokenizerFactory"
-                }
-            }
-        },
-
-        {
             "name":"get_number_only",
             "class":"solr.TextField",
             "indexAnalyzer":{
@@ -53,6 +38,11 @@
 					"pattern":"[0-9]+"
                 }
             }
+        },
+        
+        {
+            "name":"daterange",
+            "class":"solr.DateRangeField"
         }
         
     ],
@@ -75,12 +65,12 @@
         },
         {
             "name": "original_release_date",
-            "type": "standard_digits",
+            "type": "daterange",
             "indexed": true
         },
         {
             "name": "streaming_release_date",
-            "type": "standard_digits",
+            "type": "daterange",
             "indexed": true
         },
         {
@@ -115,13 +105,13 @@
         },
         {
             "name": "budget",
-            "type": "get_number_only",
-            "indexed": true
+            "type": "standard_text",
+            "indexed": false
         },
         {
             "name": "worlwide_gross_income",
-            "type": "get_number_only",
-            "indexed": true
+            "type": "standard_text",
+            "indexed": false
         },
         {
             "name": "genres",
@@ -135,7 +125,7 @@
         },
         {
             "name": "runtime",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": true
         },
         {
@@ -145,73 +135,73 @@
         },
         {
             "name": "audience_rating",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": true
         },
         {
             "name": "tomatometer_rating",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": true
         },
         {
             "name": "total_votes",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": true
         },
         {
             "name": "mean_vote_imdb",
-            "type": "standard_digits",
+            "type": "pfloat",
             "indexed": true
         },
         {
             "name": "votes_10",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": false
         },
         {
             "name": "votes_9",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": false
         },
         {
             "name": "votes_8",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": false
         },
         {
             "name": "votes_7",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": false
         },
         {
             "name": "votes_6",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": false
         },
 
         {
             "name": "votes_5",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": false
         },
         {
             "name": "votes_4",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": false
         },
         {
             "name": "votes_3",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": false
         },
         {
             "name": "votes_2",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": false
         },
         {
             "name": "votes_1",
-            "type": "standard_digits",
+            "type": "pint",
             "indexed": false
         },
         {
@@ -246,12 +236,12 @@
         },
         {
             "name": "review_score_normalized",
-            "type": "standard_digits",
+            "type": "pfloat",
             "indexed": true
         },
         {
             "name": "review_date",
-            "type": "standard_digits",
+            "type": "daterange",
             "indexed": true
         },
         {
