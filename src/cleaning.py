@@ -1,7 +1,7 @@
 import os
 
 from load_data import df_reviews as reviews, final_movies as movies
-
+import numpy as np
 
 #movies
 # movies.drop(columns=["title", "authors", "year", "avg_vote", "votes", "metascore", "usa_gross_income", "reviews_from_users", "reviews_from_critics", "audience_count", "critics_consensus", "date_published", "tomatometer_status", "audience_status", "tomatometer_count", "weighted_average_vote", "median_vote", "tomatometer_top_critics_count", "tomatometer_fresh_critics_count", "tomatometer_rotten_critics_count", "top1000_voters_rating", "top1000_voters_votes","males_0age_avg_vote", "males_0age_votes", "males_18age_avg_vote", "males_18age_votes", "males_30age_avg_vote", "males_30age_votes", "males_45age_avg_vote", "males_45age_votes", "females_0age_avg_vote", "females_0age_votes", "females_18age_avg_vote", "females_18age_votes", "females_30age_avg_vote", "females_30age_votes", "females_45age_avg_vote", "females_45age_votes", "males_allages_avg_vote", "males_allages_votes", "females_allages_avg_vote", "females_allages_votes"], inplace=True)
@@ -9,21 +9,20 @@ from load_data import df_reviews as reviews, final_movies as movies
 # drop_cols = "allgenders_0age_votes", "allgenders_0age_avg_vote", "allgenders_18age_avg_vote", "allgenders_18age_votes", "allgenders_30age_avg_vote", "allgenders_30age_votes", "allgenders_45age_avg_vote", "allgenders_45age_votes", "males_0age_avg_vote", "males_0age_votes", "males_18age_avg_vote", "males_18age_votes", "males_30age_avg_vote", "males_30age_votes", "males_45age_avg_vote", "males_45age_votes", "females_0age_avg_vote", "females_0age_votes", "females_18age_avg_vote", "females_18age_votes", "females_30age_avg_vote", "females_30age_votes", "females_45age_avg_vote", "females_45age_votes"
 #fill null values
 # movies["country"] = movies["country"].fillna("None")
-# movies["genres"] = movies["genres"].fillna("Not defined")
-# movies["movie_info"] = movies["movie_info"].fillna("Not defined")
+movies["genres"] = movies["genres"].fillna("Not defined")
+movies["movie_info"] = movies["movie_info"].fillna("Not defined")
 # movies["audience_rating"] = movies["audience_rating"].fillna("Insuficient votes")
 # movies["allgenders_0age_avg_vote"] = movies["allgenders_0age_avg_vote"].fillna("No votes")
 # movies["allgenders_0age_votes"] = movies["allgenders_0age_votes"].fillna("No votes")
 # movies["allgenders_18age_avg_vote"] = movies["allgenders_18age_avg_vote"].fillna("No votes")
 # movies["allgenders_18age_votes"] = movies["allgenders_18age_votes"].fillna("No votes")
 
-# movies["directors"] = movies["directors"].fillna("Unknown")
-# movies["budget"] = movies["budget"].fillna("Unknown")
-# movies["worlwide_gross_income"] = movies["worlwide_gross_income"].fillna("Unknown")
+movies["directors"] = movies["directors"].fillna("Unknown") #falta corrigir
+movies["budget"] = movies["budget"].fillna("Unknown")
+movies["worlwide_gross_income"] = movies["worlwide_gross_income"].fillna("Unknown")
 # movies["streaming_release_date"] = movies["streaming_release_date"].fillna("Unknown")
-# movies["production_company"] = movies["production_company"].fillna("Unknown")
-# movies["writer"] = movies["writer"].fillna("Unknown")
-# movies["actors"] = movies["actors"].fillna("Unknown")
+movies["production_company"] = movies["production_company"].fillna("Unknown")
+movies["actors"] = movies["actors"].fillna("No actors")
 movies = movies.rename(columns={'mean_vote': 'mean_vote_imdb'})
 
 movies["runtime"] = movies["runtime"].fillna(0)
@@ -32,6 +31,21 @@ movies["audience_rating"] = movies["audience_rating"].fillna(0)
 movies['audience_rating'] = movies["audience_rating"].astype('int64')
 movies["tomatometer_rating"] = movies["tomatometer_rating"].fillna(0)
 movies['tomatometer_rating'] = movies["tomatometer_rating"].astype('int64')
+
+movies["original_release_date"] = movies["original_release_date"].fillna("0000-01-01")
+movies['original_release_date'] = movies['original_release_date'].map(lambda x: str(x) + "T00:00:00Z")
+movies["streaming_release_date"] = movies["streaming_release_date"].fillna("0000-01-01")
+movies['streaming_release_date'] = movies['streaming_release_date'].map(lambda x: str(x) + "T00:00:00Z")
+
+#updated movie writer
+movies.at[138,"writer"] = "H.G. Wells"
+movies.at[339,"writer"] = "Noël Coward, Anthony Havelock-Allan, David Lean"
+movies.at[3538,"writer"] = "Steven Soderbergh"
+movies.at[4220,"writer"] = "Unknown"
+movies.at[6399,"writer"] = "Unknown"
+movies.at[7256,"writer"] = "Unknown"
+movies.at[8344,"writer"] = "Unknown"
+movies.at[8781,"writer"] = "Unknown"
 
 #updated movie country
 movies.at[6389, 'country'] = 'USA'
@@ -88,6 +102,9 @@ movies = movies[["imdb_title_id", "rotten_tomatoes_link", "original_title", "ori
 
 #reviews
 reviews.dropna(subset=["review_content"], inplace=True, how="all")
+reviews["review_date"] = reviews["review_date"].fillna("0000-01-01")
+reviews['review_date'] = reviews['review_date'].map(lambda x: str(x) + "T00:00:00Z")
+
 
 # keep only 20 reviews (max) for each movie
 # def choose_critics(x):

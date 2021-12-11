@@ -29,5 +29,3 @@ handle_platforms("../dataset/platforms/disney_plus_titles.csv", "available_disne
 os.remove("../dataset/Refined/final_movies.csv")
 movies.to_csv("../dataset/Refined/final_movies.csv")
 
-
-
