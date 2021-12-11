@@ -75,7 +75,7 @@ movies.at[8921, 'language'] = 'English'
 movies.at[9005, 'language'] = 'English'
 
 #adjusting movies columns order
-movies = movies[["imdb_title_id", "rotten_tomatoes_link", "original_title", "original_release_date", "streaming_release_date", "country", "language", "production_company", "directors", "writer", "actors", "budget", "worlwide_gross_income", "genres", "content_rating", "runtime", "movie_info", "audience_rating", "tomatometer_rating", "total_votes", "mean_vote_imdb", "votes_10", "votes_9", "votes_8", "votes_7", "votes_6", "votes_5", "votes_4", "votes_3", "votes_2", "votes_1"]]
+movies = movies[["imdb_title_id", "rotten_tomatoes_link", "original_title", "original_release_date", "streaming_release_date", "country", "language", "production_company", "directors", "writer", "actors", "budget", "worlwide_gross_income", "genres", "content_rating", "runtime", "movie_info", "audience_rating", "tomatometer_rating", "total_votes", "mean_vote_imdb", "votes_10", "votes_9", "votes_8", "votes_7", "votes_6", "votes_5", "votes_4", "votes_3", "votes_2", "votes_1", "release_year"]]
 
 #comparar colunas
 #movies['is_score_chased'] = np.where(movies['date_published']==movies['original_release_date'], 
@@ -97,7 +97,7 @@ reviews["tmp_len"] = reviews_len
 # reviews = reviews.groupby("rotten_tomatoes_link").tail(20)
 reviews = reviews.sort_values(by=["rotten_tomatoes_link", "top_critic", "tmp_len"], ascending=False).groupby("rotten_tomatoes_link").tail(20)
 reviews.drop(columns=["tmp_len", "review_type"], inplace=True)
-# reviews = reviews.iloc[::-1]
+
 
 lista = []
 letters_dict = {'A+':9.5, 'A':9.0, 'A-':8.5, 'B+':8.0, 'B':7.5, 'B-':7.0, 'C+':6.5, 'C':6.0, 'C-':5.5, 'C  -':5.5, 'D+': 5.0, 'D': 4.5, 'D-':4.0, 'E':3.0, 'F':2.0}
@@ -115,14 +115,30 @@ for x in reviews["review_score"]:
             lista.append(score)
     else:
         lista.append(letters_dict[aux[0]])
-        # stripped = aux[0].replace(" ", "")
     
+movies["type"] = "movie"
+reviews["type"] = "review"
+
+
+
+all_years = []
+all_titles = []
+
+for review in reviews["rotten_tomatoes_link"]:
+    movie = movies.loc[movies["rotten_tomatoes_link"] == review]
+    all_years.append(movie["release_year"].values[0])
+    all_titles.append(movie["original_title"].values[0])
+
+
+reviews["movie_title"] = all_titles
+reviews["release_year"] = all_years
+
 reviews["review_score_normalized"] = lista
-reviews.drop(columns=["review_score"], inplace = True)
+reviews.drop(columns=["review_score", "rotten_tomatoes_link"], inplace = True)
+
 
 os.remove("../dataset/Refined/final_movies.csv")
 movies.to_csv("../dataset/Refined/final_movies.csv")
 
 os.remove("../dataset/Refined/rt_reviews.csv")
 reviews.to_csv("../dataset/Refined/rt_reviews.csv")
-
