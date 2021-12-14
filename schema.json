@@ -220,37 +220,11 @@
             "indexed": true
         },
         {
-            "name": "critic_name",
-            "type": "standard_text",
-            "indexed": true
-        },
-        {
-            "name": "top_critic",
-            "type": "standard_text",
-            "indexed": true
-        },
-        {
-            "name": "publisher_name",
-            "type": "standard_text",
-            "indexed": true
-        },
-        {
-            "name": "review_score_normalized",
-            "type": "pfloat",
-            "indexed": true
-        },
-        {
-            "name": "review_date",
-            "type": "daterange",
-            "indexed": true
-        },
-        {
             "name": "review_content",
-            "type": "standard_text",
-            "indexed": true
+            "type": "text_en",
+            "indexed": true,
+            "stored": true,
+            "multiValued": true
         }
-
-
     ]
-
 }

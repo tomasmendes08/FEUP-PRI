@@ -1,11 +1,30 @@
-// superhero films
-production_company:"Marvel" OR production_company: "DC" OR movie_info:"superhero" OR
-movie_info:"supervillain" OR
-review_content: "superhero" OR
-review_content: "supervillain"
+//Space movies available on Netflix 
+    Boosted
+    http://localhost:8983/solr/#/movies/query?q=space%20sci-fi&q.op=OR&defType=dismax&indent=true&qf=genres%20original_title%5E10%20movie_info%5E50%20review_content%5E20&bq=genres:%22Science%20Fiction%20%26%20Fantasy%22%5E30&fq=available_netflix:%20%22True%22
+
+    Without Boosts
+    http://localhost:8983/solr/#/movies/query?q=space%20sci-fi&q.op=OR&defType=dismax&indent=true&qf=original_title%20movie_info%20review_content&bq=genres:%22Science%20Fiction%20%26%20Fantasy%22%5E30&fq=available_netflix:%20%22True%22
 
 
-//films directed by martin scorsese, featuring robert de niro and acclaimed by the critics
-directors: "Martin Scorsese" AND
-actors: "Robert De Niro" AND  
-tomatometer_rating: [80 TO 100]
+//Movies about slavery
+    Boosted
+    http://localhost:8983/solr/#/movies/query?q=slavery%20slaves%20slave&q.op=OR&defType=dismax&indent=true&fl=*,score&qf=original_title%5E10%20movie_info%5E50%20review_content%5E30&rows=70
+    
+    Without Boosts
+    http://localhost:8983/solr/#/movies/query?q=slavery%20slaves%20slave&q.op=OR&defType=dismax&indent=true&fl=*,score&qf=original_title%20movie_info%20review_content&rows=70
+
+
+//High rated (IMDB) emotive movies about World War II 
+    Boosted
+    http://localhost:8983/solr/#/movies/query?q=%22World%20war%20II%22%20emotive&q.op=OR&defType=dismax&indent=true&qf=movie_info%5E40%20review_content%5E20&fl=*,score&rows=36&fq=mean_vote_imdb:%20%5B8.0%20TO%2010.0%5D  
+
+    Without Boosts
+    http://localhost:8983/solr/#/movies/query?q="World%20war%20II"%20emotive&q.op=OR&defType=dismax&indent=true&qf=movie_info%20review_content&fl=*,score&rows=36&fq=mean_vote_imdb:%20%5B8.0%20TO%2010.0%5D
+
+
+//Movies about true crime stories
+    Boosted
+    http://localhost:8983/solr/#/movies/query?q=true%20crime%20story&q.op=AND&defType=dismax&indent=true&ps=3&qf=review_content%20movie_info%5E30&pf=review_content%5E50&rows=54
+
+    Without Boost
+    http://localhost:8983/solr/#/movies/query?q=true%20crime%20story&q.op=AND&defType=dismax&indent=true&qf=review_content%20movie_info&rows=54

@@ -108,11 +108,11 @@ reviews['review_date'] = reviews['review_date'].map(lambda x: str(x) + "T00:00:0
 
 # keep only 20 reviews (max) for each movie
 # def choose_critics(x):
-reviews_len = [len(x) for x in reviews["review_content"]]
+reviews_len = [-len(x) for x in reviews["review_content"]]
 reviews["tmp_len"] = reviews_len
 
 # reviews = reviews.groupby("rotten_tomatoes_link").tail(20)
-reviews = reviews.sort_values(by=["rotten_tomatoes_link", "top_critic", "tmp_len"], ascending=False).groupby("rotten_tomatoes_link").tail(20)
+reviews = reviews.sort_values(by=["rotten_tomatoes_link", "top_critic", "tmp_len"], ascending=True).groupby("rotten_tomatoes_link").tail(20)
 reviews.drop(columns=["tmp_len", "review_type"], inplace=True)
 
 
@@ -132,7 +132,9 @@ for x in reviews["review_score"]:
             lista.append(score)
     else:
         lista.append(letters_dict[aux[0]])
-    
+
+
+
 movies["type"] = "movie"
 reviews["type"] = "review"
 
@@ -148,10 +150,10 @@ for review in reviews["rotten_tomatoes_link"]:
 
 
 reviews["movie_title"] = all_titles
-reviews["release_year"] = all_years
+reviews["movie_release_year"] = all_years
 
 reviews["review_score_normalized"] = lista
-reviews.drop(columns=["review_score", "rotten_tomatoes_link"], inplace = True)
+reviews.drop(columns=["review_score"], inplace = True)
 
 
 os.remove("../dataset/Refined/final_movies.csv")

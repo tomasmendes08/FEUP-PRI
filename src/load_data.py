@@ -35,10 +35,14 @@ imdb_movies["year"] = imdb_movies["year"].map(lambda x: handle_year(x))
 final_movies = pd.merge(imdb_movies, df_movies, left_on =["original_title", "year"], right_on = ["movie_title" ,"release_year"])
 
 # dispose redundant data
-final_movies.drop(columns=["movie_title", "release_year", "genre", "description", "duration", "director"], inplace=True)
+final_movies.drop(columns=["movie_title", "genre", "description", "duration", "director"], inplace=True)
+
+final_movies = final_movies.loc[final_movies["original_title"] != "The Layover"]
 
 all_rt_movies = final_movies["rotten_tomatoes_link"].to_numpy()
 all_imdb_movies = final_movies["imdb_title_id"].to_numpy()
+
+
 
 df_reviews = df_reviews[df_reviews["rotten_tomatoes_link"].isin(all_rt_movies)]
 df_reviews.drop_duplicates(subset=["rotten_tomatoes_link", "critic_name"], keep='first', inplace=True)
@@ -52,4 +56,3 @@ final_movies = pd.merge(final_movies, imdb_ratings, how="inner", on="imdb_title_
 imdb_ratings.to_csv("../dataset/Refined/imdb_ratings.csv")
 df_reviews.to_csv("../dataset/Refined/rt_reviews.csv")
 final_movies.to_csv("../dataset/Refined/final_movies.csv")
-
