@@ -6,8 +6,8 @@ import json
 import requests
 import pandas as pd
 
-QRELS_FILE = "queries/query4.txt" # relevant items
-QUERY_URL = 'http://localhost:8983/solr/movies/select?defType=dismax&indent=true&q.op=AND&q=true%20crime%20story&qf=review_content%20movie_info&rows=54'
+QRELS_FILE = "queries/query1.txt" # relevant items
+QUERY_URL = 'http://localhost:8983/solr/movies/select?bq=genres%3A%22Science%20Fiction%20%26%20Fantasy%22%5E30&defType=dismax&fq=available_netflix%3A%20%22True%22&indent=true&q.op=OR&q=space%20sci-fi&qf=genres%20original_title%5E10%20movie_info%5E50%20review_content%5E20&rows=88'
 
 # Read qrels to extract relevant documents
 relevant_list = [x.split(" ")[0] for x in open(QRELS_FILE).readlines()]
@@ -15,6 +15,8 @@ relevant_list = [x.split(" ")[0] for x in open(QRELS_FILE).readlines()]
 relevant = list(map(lambda el: el.strip(), relevant_list))
 # Get query results from Solr instance
 results = requests.get(QUERY_URL).json()['response']['docs']
+
+
 
 
 # METRICS TABLE
