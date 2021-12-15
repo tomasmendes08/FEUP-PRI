@@ -7,16 +7,16 @@ import requests
 import pandas as pd
 
 QRELS_FILE = "queries/query1.txt" # relevant items
-QUERY_URL = 'http://localhost:8983/solr/movies/select?bq=genres%3A%22Science%20Fiction%20%26%20Fantasy%22%5E30&defType=dismax&fq=available_netflix%3A%20%22True%22&indent=true&q.op=OR&q=space%20sci-fi&qf=genres%20original_title%5E10%20movie_info%5E50%20review_content%5E20&rows=88'
+# QUERY_URL = 'http://localhost:8983/solr/movies/select?bq=genres%3A%22Science%20Fiction%20%26%20Fantasy%22%5E30&defType=dismax&fq=available_netflix%3A%20%22True%22&indent=true&q.op=OR&q=space%20sci-fi&qf=genres%20original_title%5E10%20movie_info%5E50%20review_content%5E20&rows=88'
 
 # Read qrels to extract relevant documents
 relevant_list = [x.split(" ")[0] for x in open(QRELS_FILE).readlines()]
 
 relevant = list(map(lambda el: el.strip(), relevant_list))
 # Get query results from Solr instance
-results = requests.get(QUERY_URL).json()['response']['docs']
+# results = requests.get(QUERY_URL).json()['response']['docs']
 
-
+results = json.load(open('queries/query1/noschema.json', encoding="utf8"))['response']['docs']
 
 
 # METRICS TABLE
@@ -31,6 +31,7 @@ def ap(results, relevant):
     index = 0
     for res in results:
         if (index != 0 and res['imdb_title_id'] in relevant) or (index == 0 and res['imdb_title_id'][0] in relevant):
+    
             relevant_index.append(index)
         index = index + 1
 
@@ -55,7 +56,7 @@ def ap(results, relevant):
 @metric
 def p10(results, relevant, n=10):
     """Precision at N"""
-    return len([doc for doc in results[:n] if doc['id'] in relevant])/n
+    return len([doc for doc in results[:n] if doc['imdb_title_id'] in relevant])/n
 
 def calculate_metric(key, results, relevant):
     return metrics[key](results, relevant)

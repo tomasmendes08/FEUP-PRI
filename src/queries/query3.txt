@@ -1,10 +1,10 @@
-tt2024544   #12 years a slave
-tt0118607   #Amistad
-tt0054331   #Spartacus
-tt1853728   #Django Unchained
-tt0052618   #Ben-Hur
-tt0443272   #Lincoln
-tt0097441   #Glory
-tt8354752   #Emperor
-tt0026174   #Captain Blood
-tt0094888   #The Scalphunters
+tt0056197 #Longest day
+tt0108052 #Schindler's list
+tt4555426 #Darkest hour
+tt0498380 #Letters from Iwo Jima
+tt0074695 #Cross of Iron
+tt0253474 #Pianist
+tt0066206 #Patton
+tt0057115 #The great escape
+tt0120815 #Saving Private Ryan
+tt0064072 #Battle of Britain

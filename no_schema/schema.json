@@ -1,0 +1,9 @@
+{
+    "add-field": [
+        {
+            "name": "imdb_title_id",
+            "type": "string",
+            "indexed": false
+        }
+    ]
+}

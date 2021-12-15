@@ -28,3 +28,4 @@
 
     Without Boost
     http://localhost:8983/solr/#/movies/query?q=true%20crime%20story&q.op=AND&defType=dismax&indent=true&qf=review_content%20movie_info&rows=54
+
