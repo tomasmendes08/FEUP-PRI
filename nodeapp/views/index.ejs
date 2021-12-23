@@ -1,0 +1,16 @@
+<%- include('partials/_header') %>
+
+    <% if (locals.data) { %>
+        <h3>You searched for: <%= data.userQuery %></h3>
+
+        <ul>
+            <% data.movies.forEach(function(movie) { %>
+                <%- include('partials/_movie', {movie: movie}); %>
+            <% }) %>
+        </ul>
+
+    <% } %>
+
+
+<%- include('partials/_footer') %>
+

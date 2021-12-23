@@ -10,10 +10,10 @@ from itertools import cycle
 # setup plot details
 colors = cycle(["navy", "turquoise", "darkorange", "cornflowerblue", "teal"])
 
-QRELS_FILE = "queries/query4.txt"
+QRELS_FILE = "queries/query5.txt"
 
-QUERY_URL_NORMAL = "http://localhost:8983/solr/movies/select?defType=dismax&indent=true&q.op=AND&q=true%20crime%20story&qf=review_content%20movie_info&rows=54"
-QUERY_URL_BOOSTED = "http://localhost:8983/solr/movies/select?defType=dismax&indent=true&pf=review_content%5E50&ps=3&q.op=AND&q=true%20crime%20story&qf=review_content%20movie_info%5E30&rows=54"
+QUERY_URL_NORMAL = "http://localhost:8983/solr/movies/select?defType=dismax&fq=genres%3A%22Kids%20%26%20Family%22&indent=true&q.op=OR&q=Christmas%20AND%20time&qf=original_title%20movie_info%20review_content"
+QUERY_URL_BOOSTED = "http://localhost:8983/solr/movies/select?defType=dismax&fq=genres%3A%22Kids%20%26%20Family%22&indent=true&pf=review_content%5E40&ps=5&q.op=OR&q=Christmas%20AND%20time&qf=original_title%5E40%20movie_info%5E30%20review_content%5E20"
 
 
 # Read qrels to extract relevant documents
@@ -22,7 +22,7 @@ relevant = list(map(lambda el: el.strip(), relevant_list))
 
 # Get query results from Solr instance
 
-results_noschema = json.load(open('queries/query4/noschema.json', encoding="utf8"))['response']['docs']
+results_noschema = json.load(open('queries/query5/noschema.json', encoding="utf8"))['response']['docs']
 results_normal = requests.get(QUERY_URL_NORMAL).json()['response']['docs']
 results_boosted = requests.get(QUERY_URL_BOOSTED).json()['response']['docs']
 
@@ -82,8 +82,8 @@ ax.set_xlim([0, 1])
 
 # set the legend and the axes
 ax.legend(handles=handles, labels=labels, loc="best")
-ax.set_title("Precision-Recall curve to Query 4")
+ax.set_title("Precision-Recall curve to Query 5")
 
-plt.savefig('queries/query4/precision_recall.png')
+plt.savefig('queries/query5/precision_recall5.pdf')
 
 

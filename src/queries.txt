@@ -16,10 +16,10 @@
 
 //High rated (IMDB) emotive movies about World War II 
     Boosted
-    http://localhost:8983/solr/#/movies/query?q=%22World%20war%20II%22%20emotive&q.op=OR&defType=dismax&indent=true&qf=movie_info%5E40%20review_content%5E20&fl=*,score&rows=36&fq=mean_vote_imdb:%20%5B8.0%20TO%2010.0%5D  
+    http://localhost:8983/solr/#/movies/query?q=%22World%20war%20II%22%20emotional&q.op=OR&defType=dismax&indent=true&qf=movie_info%5E20%20review_content%5E40&fl=*,score&rows=36&fq=mean_vote_imdb:%20%5B8.0%20TO%2010.0%5D  
 
     Without Boosts
-    http://localhost:8983/solr/#/movies/query?q="World%20war%20II"%20emotive&q.op=OR&defType=dismax&indent=true&qf=movie_info%20review_content&fl=*,score&rows=36&fq=mean_vote_imdb:%20%5B8.0%20TO%2010.0%5D
+    http://localhost:8983/solr/#/movies/query?q=%22World%20war%20II%22%20emotional&q.op=OR&defType=dismax&indent=true&qf=movie_info%20review_content&fl=*,score&rows=36&fq=mean_vote_imdb:%20%5B8.0%20TO%2010.0%5D
 
 
 //Movies about true crime stories
@@ -29,3 +29,5 @@
     Without Boost
     http://localhost:8983/solr/#/movies/query?q=true%20crime%20story&q.op=AND&defType=dismax&indent=true&qf=review_content%20movie_info&rows=54
 
+//Movies about Christmas
+	http://localhost:8983/solr/#/movies/query?q=Christmas%20AND%20time&q.op=OR&defType=dismax&indent=true&qf=original_title%5E40%20movie_info%5E30%20review_content%5E20&ps=5&pf=review_content%5E40&fq=genres:%22Kids%20%26%20Family%22

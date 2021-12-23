@@ -9,7 +9,8 @@
                 },
                 "filters":[
                     {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
-                    {"class":"solr.LowerCaseFilterFactory"}
+                    {"class":"solr.LowerCaseFilterFactory"},
+					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt"}
                 ]
             },
             "queryAnalyzer":{
@@ -18,28 +19,11 @@
                 },
                 "filters":[
                     {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
-                    {"class":"solr.LowerCaseFilterFactory"}
+                    {"class":"solr.LowerCaseFilterFactory"},
+					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt"}
                 ]
             }
         },
-
-        {
-            "name":"get_number_only",
-            "class":"solr.TextField",
-            "indexAnalyzer":{
-                "tokenizer":{
-                    "class":"solr.SimplePatternTokenizerFactory",
-					"pattern":"[0-9]+"
-                }
-            },
-            "queryAnalyzer":{
-                "tokenizer":{
-                    "class":"solr.SimplePatternTokenizerFactory",
-					"pattern":"[0-9]+"
-                }
-            }
-        },
-        
         {
             "name":"daterange",
             "class":"solr.DateRangeField"
@@ -70,8 +54,8 @@
         },
         {
             "name": "streaming_release_date",
-            "type": "daterange",
-            "indexed": true
+            "type": "standard_text",
+            "indexed": false
         },
         {
             "name": "country",

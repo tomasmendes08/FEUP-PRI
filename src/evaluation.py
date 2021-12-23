@@ -6,17 +6,17 @@ import json
 import requests
 import pandas as pd
 
-QRELS_FILE = "queries/query1.txt" # relevant items
-# QUERY_URL = 'http://localhost:8983/solr/movies/select?bq=genres%3A%22Science%20Fiction%20%26%20Fantasy%22%5E30&defType=dismax&fq=available_netflix%3A%20%22True%22&indent=true&q.op=OR&q=space%20sci-fi&qf=genres%20original_title%5E10%20movie_info%5E50%20review_content%5E20&rows=88'
+QRELS_FILE = "queries/query5.txt" # relevant items
+QUERY_URL = 'http://localhost:8983/solr/movies/select?defType=dismax&fq=genres%3A%22Kids%20%26%20Family%22&indent=true&q.op=OR&q=Christmas%20AND%20time&qf=original_title%20movie_info%20review_content'
 
 # Read qrels to extract relevant documents
 relevant_list = [x.split(" ")[0] for x in open(QRELS_FILE).readlines()]
 
 relevant = list(map(lambda el: el.strip(), relevant_list))
 # Get query results from Solr instance
-# results = requests.get(QUERY_URL).json()['response']['docs']
+results = requests.get(QUERY_URL).json()['response']['docs']
 
-results = json.load(open('queries/query1/noschema.json', encoding="utf8"))['response']['docs']
+results = json.load(open('queries/query5/noschema.json', encoding="utf8"))['response']['docs']
 
 
 # METRICS TABLE
@@ -75,7 +75,7 @@ df = pd.DataFrame([['Metric','Value']] +
     ]
 )
 
-with open('results.tex','w') as tf:
+with open('queries/query5/results_schema.tex','w') as tf:
     tf.write(df.to_latex())
 
 # PRECISION-RECALL CURVE
@@ -113,4 +113,4 @@ for idx, step in enumerate(recall_values):
 
 disp = PrecisionRecallDisplay([precision_recall_match.get(r) for r in recall_values], recall_values)
 disp.plot()
-plt.savefig('precision_recall.pdf')
+plt.savefig('queries/query5/table_schemaless.pdf')
