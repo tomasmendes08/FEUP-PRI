@@ -71,7 +71,7 @@
         {
             "name": "streaming_release_date",
             "type": "daterange",
-            "indexed": true
+            "indexed": false
         },
         {
             "name": "country",
@@ -221,7 +221,7 @@
         },
         {
             "name": "review_content",
-            "type": "text_en",
+            "type": "standard_text",
             "indexed": true,
             "stored": true,
             "multiValued": true

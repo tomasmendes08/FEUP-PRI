@@ -84,6 +84,6 @@ ax.set_xlim([0, 1])
 ax.legend(handles=handles, labels=labels, loc="best")
 ax.set_title("Precision-Recall curve to Query 4")
 
-plt.savefig('queries/query4/precision_recall.png')
+plt.savefig('queries/query4/precision_recall4.png')
 
 
