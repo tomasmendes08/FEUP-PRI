@@ -36,6 +36,13 @@ router.get("/search", (req,res) => {
         }
         const response = result.response
 
+        // console.log(response);
+        // console.log(response.docs[0]["original_release_date"]);
+        
+        for (let i = 0; i < response.docs.length; i++) {
+            response.docs[i]["original_release_date"] = response.docs[i]["original_release_date"].slice(0,10);
+        }
+
         res.render("index", {data: {
             userQuery: search,
             movies: response.docs
