@@ -25,10 +25,6 @@
         <p class="card-text">
             <%= movie.movie_info %>
         </p>
-        <form action="movie" method = "GET">
-            <input hidden name="original_title" value="<%= movie.original_title %>" type="text">
-            <input hidden name="year" value="<%= movie.release_year %>" type="text">
-            <button class="btn btn-dark" type = "submit">More info</button>
-        </form>
+        <a href="movie?title=<%= movie.original_title %>&year=<%= movie.release_year %>" class="btn btn-dark" >More info</a>
     </div>
 </div>

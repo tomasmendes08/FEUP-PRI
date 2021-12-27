@@ -1,6 +1,7 @@
 const SolrNode = require("solr-node");
 const express = require("express");
 
+
 var client = new SolrNode({
     host: "127.0.0.1",
     port: "8983",
@@ -11,27 +12,35 @@ var client = new SolrNode({
 
 const router = express.Router();
 
-// router.post("/movie", function(req, res) {
-//     console.log(req.body)
-//     let link = req.params
-//     const searchQ = "imdb_title_id:" + link
-//     const q = client.query().q(searchQ).addParams({
-//         wt:"json",
-//         indent: true,
-//         // rows: 10
-//     })
-   
-//     client.search(q, function(err, result) {
-//         if (err) {
-//             console.log(err)
-//             return
-//         }
-//         const response = result.response
-//         console.log(response)
-//     })
+router.get("/movie", function(req, res) {
+    const title = req.query["title"];
+    const year = req.query["year"];
 
-//     // res.render()
-// })
+    console.log(title,year)
+
+    let searchQ = `original_title:"${title}"`
+    searchQ += " AND original_release_date:" + year
+    searchQ.replace(" ", "%20")
+    const q = client.query().q(searchQ).addParams({
+        wt:"json",
+        indent: true,
+        // rows: 10
+    })
+   
+    client.search(q, function(err, result) {
+        if (err) {
+            console.log(err)
+            return
+        }
+        const response = result.response
+
+        movie = response.docs[0]
+        console.log(movie)
+        res.render("more_info", {movie: movie})
+    })
+
+    // res.render()
+})
 
 router.get("/", function(req, res) {
     console.log("Basic web page")
@@ -57,9 +66,6 @@ router.get("/search", (req,res) => {
             return
         }
         const response = result.response
-
-        // console.log(response);
-        // console.log(response.docs[0]["original_release_date"]);
 
         for (let i = 0; i < response.docs.length; i++) {
             response.docs[i]["original_release_date"] = response.docs[i]["original_release_date"].slice(0,10);
