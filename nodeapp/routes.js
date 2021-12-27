@@ -11,6 +11,28 @@ var client = new SolrNode({
 
 const router = express.Router();
 
+// router.post("/movie", function(req, res) {
+//     console.log(req.body)
+//     let link = req.params
+//     const searchQ = "imdb_title_id:" + link
+//     const q = client.query().q(searchQ).addParams({
+//         wt:"json",
+//         indent: true,
+//         // rows: 10
+//     })
+   
+//     client.search(q, function(err, result) {
+//         if (err) {
+//             console.log(err)
+//             return
+//         }
+//         const response = result.response
+//         console.log(response)
+//     })
+
+//     // res.render()
+// })
+
 router.get("/", function(req, res) {
     console.log("Basic web page")
     res.render("index");
@@ -38,7 +60,7 @@ router.get("/search", (req,res) => {
 
         // console.log(response);
         // console.log(response.docs[0]["original_release_date"]);
-        
+
         for (let i = 0; i < response.docs.length; i++) {
             response.docs[i]["original_release_date"] = response.docs[i]["original_release_date"].slice(0,10);
         }
