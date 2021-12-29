@@ -16,7 +16,7 @@ router.get("/movie", function(req, res) {
     const title = req.query["title"];
     const year = req.query["year"];
 
-    console.log(title,year)
+    //console.log(title,year)
 
     let searchQ = `original_title:"${title}"`
     searchQ += " AND original_release_date:" + year
