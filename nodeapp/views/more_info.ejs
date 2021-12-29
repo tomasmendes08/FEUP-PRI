@@ -1,5 +1,298 @@
 <%- include('partials/_header') %>
 
-<p>
-    <%= JSON.stringify(movie, null, 2) %>
-</p>
+<div class="film-page container my-5" id="movie-top">
+    <div class="movie-header">
+        <div class="movie-header-info">
+            <div class="movie-header-title row">
+                <div class="movie-title fw-bold fs-2 col-10"><%= movie.original_title %></div>
+                <button class="btn btn-outline-dark col-2" onclick="location.href='#reviews'">Go to Reviews</button>
+            </div>
+            <ul class="movie-header-info-list d-flex my-3" >
+                <li class="movie-date-li fs-5">
+                    <div class="movie-date">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                        </svg>
+                        <%= movie.original_release_date %>
+                    </div>
+                </li>
+                <li class="movie-runtine-li fs-5 ms-5">
+                    <div class="movie-runtime">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                        </svg>
+                        <%= movie.runtime %> mins
+                    </div>
+                </li>
+                <li class="movie-content-rating-li fs-5 ms-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                    </svg>
+                    <%= movie.content_rating %>
+                </li>
+            </ul>
+        </div>
+        <img
+            src="https://www.tasteofcinema.com/wp-content/uploads/2017/11/manhattan.jpg"
+            class="movie-img img-fluid rounded-3"
+            alt="Movie Card"
+        />
+    </div>
+    <div class="genres d-flex my-3 col-10">
+    <% for(let i = 0; i < movie.genres.length; i++){ %>
+        <button class="btn btn-dark rounded-pill me-2"><%= movie.genres[i] %></button>
+    <% } %>
+    </div>
+    <div class="movie-synopsis fs-5 col-10">
+        <%= movie.movie_info %>
+    </div>
+    <div class="move-info-stats mt-3 row">
+        <div class="imdb col-3">
+            <div class="imdb-tag fw-bold fs-4">IMDb Rating</div>
+            <div class="imdb-rating d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-star-fill me-1" viewBox="0 0 16 16">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                </svg>
+                <div class="rating-in-10-and-votes fs-5 d-flex flex-column fw-bold">
+                    <div class="rating-in-10 d-flex ms-2">
+                        <div><%= movie.mean_vote_imdb %></div>
+                        <div class="text-muted fs-6">/10</div>
+                    </div>
+                    <div class="rating-votes fs-6 text-muted ms-1">
+                        <%= movie.total_votes %> votes
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div class="rotten-tomatoes-tomatometer col-lg-4 col-5">
+            <div class="tomatometer-tag fw-bold fs-4">Tomatometer Rating</div>
+            <div class="tomatometer-rating d-flex mt-1">
+                <img class="me-2" src="https://img.icons8.com/ios-filled/25/000000/tomato.png"/>
+                <div class="tomatometer-rating-score fw-bold fs-5"><%= movie.tomatometer_rating %>%</div>
+            </div>
+        </div>
+        <div class="rotten-tomatoes-audience col-4">
+            <div class="audience-tag fw-bold fs-4">Audience Rating</div>
+            <div class="audience-rating d-flex mt-1">
+                <img class="me-2" src="https://img.icons8.com/ios-glyphs/29/000000/popcorn.png"/>
+                <div class="audience-rating-score fw-bold fs-5"><%= movie.audience_rating %>%</div>
+            </div>
+        </div>
+    </div>
+    <div class="movie-info">
+        <div class="move-body-info-technical col-7">
+            <hr class="" style="border-top: 2px solid #212529;">
+            <div class="movie-director d-flex fs-5 mt-4">
+                <div class="director-tag fw-bold">Director</div>
+                <div class="director-name">
+                    <% if(movie.directors.length < 2) {%>
+                    <div class="director-name-2 ms-3">
+                        <%= movie.directors %>
+                    </div>
+                    <% } else {%>
+                        <% if(movie.directors.length < 3) {%>
+                        <ul class="d-flex" style="list-style-type: none;">
+                        <% for(let i = 0; i < movie.directors.length; i++){ %>
+                                <li class="me-5"><%= movie.directors[i] %></li>
+                        <%}%>
+                        </ul>
+                        <%} else {%>
+                        <ul class="d-flex flex-column" style="list-style-type: none;">
+                        <% for(let i = 0; i < movie.directors.length; i++){ %>
+                                <li class="mb-2"><%= movie.directors[i] %></li>
+                        <%}%>
+                        </ul>
+                        <%}%>
+                    <%}%>    
+                </div>
+            </div>
+            <hr class="" style="border-top: 2px solid #212529;">
+            <div class="movie-writer d-flex fs-5 mt-4">
+                <div class="writer-tag fw-bold">Writer</div>
+                <div class="writer-name">
+                    <% if(movie.writer.length < 2) {%>
+                    <div class="writer-name-2 ms-3">
+                        <%= movie.writer %>
+                    </div>
+                    <% } else {%>
+                        <% if(movie.writer.length < 3) {%>
+                            <ul class="d-flex flex-lg-row flex-column" style="list-style-type: none;">
+                            <% for(let i = 0; i < movie.writer.length; i++){ %>
+                                    <li class="me-5"><%= movie.writer[i] %></li>
+                            <%}%>
+                            </ul>
+                        <%} else {%>
+                            <ul class="d-flex flex-column" style="list-style-type: none;">
+                            <% for(let i = 0; i < movie.writer.length; i++){ %>
+                                    <li class="mb-2"><%= movie.writer[i] %></li>
+                            <%}%>
+                            </ul>
+                        <%}%>
+                    <%}%>    
+                </div>
+            </div>
+            <hr class="" style="border-top: 2px solid #212529;">
+            <div class="movie-actors d-flex fs-5 mt-4">
+                <div class="actors-tag fw-bold">Actors</div>
+                <div class="actors-name">
+                    <% if(movie.actors.length < 2) {%>
+                    <div class="actors-name-2 ms-3">
+                        <%= movie.actors %>
+                    </div>
+                    <% } else {%>
+                        <% if(movie.actors.length < 3) {%>
+                            <ul class="d-flex" style="list-style-type: none;">
+                            <% for(let i = 0; i < movie.actors.length; i++){ %>
+                                    <li class="me-5"><%= movie.actors[i] %></li>
+                            <%}%>
+                            </ul>
+                        <%} else {%>
+                            <ul class="d-flex flex-column" style="list-style-type: none;">
+                            <% for(let i = 0; i < movie.actors.length; i++){ %>
+                                    <li class="mb-2"><%= movie.actors[i] %></li>
+                            <%}%>
+                            </ul>
+                        <%}%>
+                    <%}%>    
+                </div>
+            </div>
+            <hr class="" style="border-top: 2px solid #212529;">
+            <div class="movie-info-details">
+                <div class="movie-info-details-title fs-2 fw-bold">Details</div>
+                <div class="movie-production-company d-flex fs-5 mt-4">
+                    <div class="production-company-tag fw-bold">Production Company</div>
+                    <div class="production-company-name">
+                        <% if(movie.production_company.length < 2) {%>
+                        <div class="production-company-name-2 ms-3">
+                            <%= movie.production_company %>
+                        </div>
+                        <% } else {%>
+                            <% if(movie.production_company.length < 2) {%>
+                                <ul class="d-flex" style="list-style-type: none;">
+                                <% for(let i = 0; i < movie.production_company.length; i++){ %>
+                                        <li class="me-5"><%= movie.production_company[i] %></li>
+                                <%}%>
+                                </ul>
+                            <%} else {%>
+                                <ul class="d-flex flex-column" style="list-style-type: none;">
+                                <% for(let i = 0; i < movie.production_company.length; i++){ %>
+                                        <li class="mb-2"><%= movie.production_company[i] %></li>
+                                <%}%>
+                                </ul>
+                            <%}%>
+                        <%}%>   
+                    </div>
+                </div>
+                <div class="movie-country d-flex fs-5 mt-4">
+                    <div class="country-tag fw-bold">Country</div>
+                    <div class="country-name">
+                        <% if(movie.country.length < 2) {%>
+                        <div class="country-name-2 ms-3">
+                            <%= movie.country %>
+                        </div>
+                        <% } else {%>
+                            <% if(movie.country.length < 3) {%>
+                                <ul class="d-flex" style="list-style-type: none;">
+                                <% for(let i = 0; i < movie.country.length; i++){ %>
+                                        <li class="me-5"><%= movie.country[i] %></li>
+                                <%}%>
+                                </ul>
+                            <%} else {%>
+                                <ul class="d-flex flex-column" style="list-style-type: none;">
+                                <% for(let i = 0; i < movie.country.length; i++){ %>
+                                        <li class="mb-2"><%= movie.country[i] %></li>
+                                <%}%>
+                                </ul>
+                            <%}%>
+                        <%}%>    
+                    </div>
+                </div>
+                <div class="movie-language d-flex fs-5 mt-4">
+                    <div class="language-tag fw-bold">Language</div>
+                    <div class="language-name">
+                        <% if(movie.language.length < 2) {%>
+                        <div class="language-name-2 ms-3">
+                            <%= movie.language %>
+                        </div>
+                        <% } else {%>
+                            <% if(movie.language.length < 3) {%>
+                                <ul class="d-flex" style="list-style-type: none;">
+                                <% for(let i = 0; i < movie.language.length; i++){ %>
+                                        <li class="me-5"><%= movie.language[i] %></li>
+                                <%}%>
+                                </ul>
+                            <%} else {%>
+                                <ul class="d-flex flex-column" style="list-style-type: none;">
+                                <% for(let i = 0; i < movie.language.length; i++){ %>
+                                        <li class="mb-2"><%= movie.language[i] %></li>
+                                <%}%>
+                                </ul>
+                            <%}%>
+                        <%}%>    
+                    </div>
+                </div>
+                <div class="movie-budget d-flex fs-5 mt-4">
+                    <div class="budget-tag fw-bold">Budget</div>
+                    <div class="budget-number ms-3">
+                        <%= movie.budget %>
+                    </div>
+                </div>
+                <div class="movie-income d-flex fs-5 mt-4">
+                    <div class="income-tag fw-bold">Worldwide gross income</div>
+                    <div class="income-number ms-3">
+                        <%= movie.worlwide_gross_income %>
+                    </div>
+                </div>
+                <div class="movie-streaming d-flex fs-5 mt-4">
+                    <div class="streaming-tag fw-bold">Streaming release date</div>
+                    <div class="streaming-number ms-3">
+                        <%= movie.streaming_release_date %>
+                    </div>
+                </div>
+            </div>
+            <hr class="" style="border-top: 3px solid #212529;">
+            <div class="movie-info-plataforms-title fs-2 fw-bold">Plataforms - Where to watch</div>
+            <div class="movie-info-plataforms row mt-3">
+                <div class="movie-info-netflix col-4 d-flex flex-column align-items-center">
+                    <img src="https://img.icons8.com/ios/100/000000/netflix.png" alt="Netflix"/>
+                    <% if(movie.available_netflix == 'true') {%>
+                        <div class="movie-info-netflix-available fs-5">Available</div>
+                    <%} else{%>
+                        <div class="movie-info-netflix-not-available fs-5">Not available</div>
+                    <%}%>
+                </div>
+                <div class="movie-info-prime-video col-4 d-flex flex-column align-items-center">
+                    <img src="https://img.icons8.com/ios/100/000000/amazon-prime-video.png" alt="Amazon Prime Video"/>
+                    <% if(movie.available_prime_video == 'true') {%>
+                        <div class="movie-info-prime-video-available fs-5">Available</div>
+                    <%} else{%>
+                        <div class="movie-info-prime-video-not-available fs-5">Not available</div>
+                    <%}%>
+                </div>
+                <div class="movie-info-disney col-4 d-flex flex-column align-items-center">
+                    <img src="https://img.icons8.com/ios-filled/100/000000/disney-plus.png" alt="Disney+"/>
+                    <% if(movie.available_disney == 'true') {%>
+                        <div class="movie-info-disney-available fs-5">Available</div>
+                    <%} else{%>
+                        <div class="movie-info-disney-not-available fs-5">Not available</div>
+                    <%}%>
+                </div>
+            </div>
+            <hr class="" style="border-top: 3px solid #212529;">
+        </div>
+    </div>
+    <div class="movie-reviews" id="reviews">
+        <div class="movie-reviews-title fs-2 fw-bold">Reviews</div>
+        <div class="movie-reviews-conten mt-4">
+            <ul>
+                <% for(let i = 0; i < movie.review_content.length; i++){ %>
+                    <li class="mb-2 fs-5"><%= movie.review_content[i] %></li>
+                <%}%>
+            </ul>
+        </div>
+    </div>
+    <div class="row justify-content-end">
+        <button class="btn btn-outline-dark col-2" onclick="location.href='#movie-top'">Back to Top</button>
+    </div>
+</div>
