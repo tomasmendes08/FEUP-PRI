@@ -43,11 +43,9 @@ router.get("/movie", function(req, res) {
         response.docs[0]["production_company"] = response.docs[0]["production_company"].split(",")
         response.docs[0]["language"] = response.docs[0]["language"].split(",")
         response.docs[0]["country"] = response.docs[0]["country"].split(",")
-        // for(let i = 0; i < response.docs[0].genres; i++){
-        //     let aux = "";
-        // }
-        movie = response.docs[0]
-        //console.log(movie)
+       
+        let movie = response.docs[0]
+        console.log(movie)
         res.render("more_info", {movie: movie})
     })
 
