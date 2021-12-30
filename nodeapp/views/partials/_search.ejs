@@ -1,6 +1,6 @@
-<div class="mainpage" style="height: 280px; background-image: url('https://i.pinimg.com/originals/e9/93/ba/e993ba826dd8f51134d509122d4fd059.gif'); background-size: contain;">
+<div class="search-header" style="height: 280px; background-image: url('https://i.pinimg.com/originals/e9/93/ba/e993ba826dd8f51134d509122d4fd059.gif'); background-size: contain;">
     <div class="search-form d-flex flex-column align-items-center">
-        <div class="mainpage-message fs-3 mt-5 text-light fw-bold">
+        <div class="search-message fs-3 mt-5 text-light fw-bold">
             In the mood for movies? Search for the perfect choice!
         </div>
         <form class="search-form d-flex w-50 my-5" action="search" method = "GET">
@@ -16,6 +16,11 @@
 </div>
 <div class="search-results mt-4">
     <% if (locals.data) { %>
+    <% if(data.movies.length == 0) {%>
+        <div class="search-results-title-text fs-3 d-flex justify-content-center fw-bold">
+            No results found for "<%= data.userQuery %>"
+        </div>
+    <%} else {%>
     <div class="search-results-title-text fs-3 d-flex justify-content-center fw-bold">
         Search results for "<%= data.userQuery %>"
     </div>
@@ -26,5 +31,6 @@
             <% }) %>
         </div>
     </div>    
-    <% } %>
+    <% }%>
+    <% }%>
 </div>

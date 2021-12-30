@@ -7,7 +7,7 @@
                 <div class="movie-title fw-bold fs-2 col-10"><%= movie.original_title %></div>
                 <button class="btn btn-outline-dark col-2" onclick="location.href='#reviews'">Go to Reviews</button>
             </div>
-            <ul class="movie-header-info-list d-flex my-3" >
+            <ul class="movie-header-info-list d-flex my-3 p-0" style="list-style-type: none;">
                 <li class="movie-date-li fs-5">
                     <div class="movie-date">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
@@ -16,7 +16,7 @@
                         <%= movie.original_release_date %>
                     </div>
                 </li>
-                <li class="movie-runtine-li fs-5 ms-5">
+                <li class="movie-runtine-li fs-5 ms-4">
                     <div class="movie-runtime">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
                             <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
@@ -25,7 +25,7 @@
                         <%= movie.runtime %> mins
                     </div>
                 </li>
-                <li class="movie-content-rating-li fs-5 ms-5">
+                <li class="movie-content-rating-li fs-5 ms-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                     </svg>
@@ -36,18 +36,19 @@
         <img
             src="<%= movie.Poster %>"
             class="movie-img img-fluid rounded-3"
-            alt="Movie Card"
+            alt="Movie Poster"
         />
+        <!-- <script src="//embed.flowplayer.org/5.5.0/embed.min.js"><div class="flowplayer" style="width: 320px; height: 212px;" data-origin="https://www.allmovie.com/movie/the-matrix-v177524" data-key="$364611012062791" data-rtmp="0"><video><source type="video/mp4" src="https://video.internetvideoarchive.net/video.mp4?fmt=4&amp;cmd=6&amp;videokbrate=450&amp;sub=AllMovie&amp;customerId=198732&amp;PublishedId=8451&amp;e=1640893999&amp;h=3b4e682d3aa91e4208c25b5f8785cd6d"></video></div></script> -->
     </div>
-    <div class="genres d-flex my-3 col-10">
+    <div class="genres d-flex my-4 col-10">
     <% for(let i = 0; i < movie.genres.length; i++){ %>
-        <button class="btn btn-dark rounded-pill me-2"><%= movie.genres[i] %></button>
+        <button class="btn btn-dark rounded-pill me-2" onclick="location.href='/search?query=<%= movie.genres[i] %>'"><%= movie.genres[i] %></button>
     <% } %>
     </div>
     <div class="movie-synopsis fs-5 col-10">
         <%= movie.movie_info %>
     </div>
-    <div class="move-info-stats mt-3 row">
+    <div class="move-info-stats mt-4 mb-4 row">
         <div class="imdb col-3">
             <div class="imdb-tag fw-bold fs-4">IMDb Rating</div>
             <div class="imdb-rating d-flex align-items-center">
@@ -80,10 +81,10 @@
             </div>
         </div>
     </div>
+    <hr class="col-7" style="border-top: 2px solid #212529;">
     <div class="movie-info">
         <div class="move-body-info-technical col-7">
-            <hr class="" style="border-top: 2px solid #212529;">
-            <div class="movie-director d-flex fs-5 mt-4">
+            <div class="movie-director d-flex fs-5 mt-3">
                 <div class="director-tag fw-bold">Director</div>
                 <div class="director-name">
                     <% if(movie.directors.length < 2) {%>
@@ -164,7 +165,7 @@
                     <div class="production-company-tag fw-bold">Production Company</div>
                     <div class="production-company-name">
                         <% if(movie.production_company.length < 2) {%>
-                        <div class="production-company-name-2 ms-3">
+                        <div class="production-company-name-2 ms-lg-3">
                             <%= movie.production_company %>
                         </div>
                         <% } else {%>
