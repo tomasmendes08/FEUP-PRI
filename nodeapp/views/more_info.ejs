@@ -42,7 +42,7 @@
     </div>
     <div class="genres d-flex my-4 col-10">
     <% for(let i = 0; i < movie.genres.length; i++){ %>
-        <button class="btn btn-dark rounded-pill me-2" onclick="location.href='/search?query=<%= movie.genres[i] %>'"><%= movie.genres[i] %></button>
+        <button class="btn btn-dark rounded-pill me-2"><%= movie.genres[i] %></button>
     <% } %>
     </div>
     <div class="movie-synopsis fs-5 col-10">

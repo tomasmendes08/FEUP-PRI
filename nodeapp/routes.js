@@ -47,7 +47,7 @@ router.get("/movie", function(req, res) {
         //     let aux = "";
         // }
         movie = response.docs[0]
-        console.log(movie)
+        //console.log(movie)
         res.render("more_info", {movie: movie})
     })
 
@@ -60,8 +60,9 @@ router.get("/", function(req, res) {
 })
 
 router.get("/search", (req,res) => {
-    const search = req.query["query"];
-
+    // console.log(req)
+    const search = req.query["query"]
+    // console.log(search)
     const searchQuery = client.query()
     .qop("OR")
     .q(search)
