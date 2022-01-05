@@ -1,0 +1,83 @@
+{
+	"add-field-type": [
+        {
+            "name":"standard_text",
+            "class":"solr.TextField",
+            "indexAnalyzer":{
+                "tokenizer":{
+                    "class":"solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
+                    {"class":"solr.LowerCaseFilterFactory"},
+					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt"}
+                ]
+            },
+            "queryAnalyzer":{
+                "tokenizer":{
+                    "class":"solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
+                    {"class":"solr.LowerCaseFilterFactory"},
+					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt"}
+                ]
+            }
+        },
+        {
+            "name":"daterange",
+            "class":"solr.DateRangeField"
+        }
+        
+    ],
+    
+    "add-field": [
+        {
+            "name": "rotten_tomatoes_link",
+            "type": "standard_text",
+            "indexed": false
+        },
+
+        {
+            "name": "critic_name",
+            "type": "standard_text",
+            "indexed": true
+        },
+
+        {
+            "name": "review_date",
+            "type": "daterange",
+            "indexed": true
+        },
+
+        {
+            "name": "movie_title",
+            "type": "standard_text",
+            "indexed": true
+        },
+
+        {
+            "name": "publisher_name",
+            "type": "standard_text",
+            "indexed": false
+        },
+
+        {
+            "name": "movie_release_year",
+            "type": "pint",
+            "indexed": true
+        },
+
+        {
+            "name": "review_score_normalized",
+            "type": "pfloat",
+            "indexed": true
+        },
+
+        {
+            "name": "review_content",
+            "type": "standard_text",
+            "indexed": true
+        }
+    ]
+}

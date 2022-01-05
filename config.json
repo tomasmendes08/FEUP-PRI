@@ -1,0 +1,38 @@
+{
+	"update-searchcomponent":{
+		"name": "spellcheck",
+		"field": "spell",
+		"class": "solr.SpellCheckComponent",
+		"classname":"solr.DirectSolrSpellChecker",
+		"distanceMeasure":"internal",
+		"accuracy":0.5,
+		"maxQueryFrequency":0.01,
+		"maxEdits":2,
+		"minPrefix":1,
+		"maxInspections":5,
+		"minQueryLength":4
+	},
+	
+	"update-requesthandler":
+	{
+		"name": "/select",
+		"class":"solr.SearchHandler",
+        "defaults":
+		{
+          "echoParams":"explicit",,
+		  "spellcheck.dictionary":"default",
+          "spellcheck":"on",
+          "spellcheck.extendedResults":"true",
+          "spellcheck.count":"10",
+          "spellcheck.alternativeTermCount":"5",
+          "spellcheck.maxResultsForSuggest":"5",
+          "spellcheck.collate":"true",
+          "spellcheck.collateExtendedResults":"true",
+          "spellcheck.maxCollationTries":"10",
+          "spellcheck.maxCollations":"5",
+          "rows":10
+		},
+		"last-components":["spellcheck"]
+		
+	}
+}

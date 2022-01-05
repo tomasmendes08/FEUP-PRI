@@ -44,11 +44,15 @@
                 </li>
             </ul>
         </div>
-        <img
-            src="<%= movie.Poster %>"
-            class="movie-img img-fluid rounded-3"
-            alt="Movie Poster"
-        />
+        <div class="row justify-content-around">
+            <img
+                src="<%= movie.Poster %>"
+                class="movie-img img-fluid rounded-3 col-3"
+                alt="Movie Poster"
+            />
+            <iframe src="<%= movie.trailer %>" class = "col-9"></iframe>
+
+        </div>
     </div>
     <div class="genres d-flex my-4 col-10">
     <% for(let i = 0; i < movie.genres.length; i++){ %>
@@ -453,8 +457,8 @@
         <div class="movie-reviews-title fs-2 fw-bold">Reviews</div>
         <div class="movie-reviews-conten mt-4">
             <ul>
-                <% for(let i = 0; i < movie.review_content.length; i++){ %>
-                    <li class="mb-2 fs-5"><%= movie.review_content[i] %></li>
+                <% for(let i = 0; i < reviews.length; i++){ %>
+                    <li class="mb-2 fs-5"><%= reviews[i].review_content %></li>
                 <%}%>
             </ul>
         </div>

@@ -27,9 +27,10 @@
         {
             "name":"daterange",
             "class":"solr.DateRangeField"
-        }
-        
-    ],
+        },
+	],
+	
+	
     
     "add-field": [
         {
@@ -37,6 +38,13 @@
             "type": "standard_text",
             "indexed": false
         },
+		{
+			"name": "spell", 
+			"type": "standard_text",
+			"indexed": true,
+			"stored": false,
+			"multiValued": true
+		},
         {
             "name": "rotten_tomatoes_link",
             "type": "standard_text",
@@ -202,13 +210,13 @@
             "name": "available_disney_",
             "type": "standard_text",
             "indexed": true
-        },
-        {
-            "name": "review_content",
-            "type": "text_en",
-            "indexed": true,
-            "stored": true,
-            "multiValued": true
         }
-    ]
+        
+    ],
+	
+	"add-copy-field":
+	{
+		"source": "original_title",
+		"dest": "spell"
+	}
 }
