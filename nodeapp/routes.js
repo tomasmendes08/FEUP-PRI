@@ -9,6 +9,13 @@ var client = new SolrNode({
     protocol: "http"
 })
 
+var client_reviews = new SolrNode({
+    host: "127.0.0.1",
+    port: "8983",
+    core: "reviews",
+    protocol: "http"
+})
+
 
 const router = express.Router();
 
@@ -16,7 +23,7 @@ router.get("/movie", function(req, res) {
     const title = req.query["title"];
     const year = req.query["year"];
 
-    //console.log(title,year)
+    let movie = null 
 
     let searchQ = `original_title:"${title}"`
     searchQ += " AND original_release_date:" + year
@@ -26,7 +33,18 @@ router.get("/movie", function(req, res) {
         indent: true,
         // rows: 10
     })
-   
+
+
+    let search_reviews = `movie_title:"${title}"`
+    search_reviews += " AND movie_release_year:" + year
+    search_reviews.replace(" ", "%20")
+
+    const q_reviews = client.query().q(search_reviews).addParams({
+        wt:"json",
+        indent: true,
+        // rows: 10
+    })
+    
     client.search(q, function(err, result) {
         if (err) {
             console.log(err)
@@ -43,13 +61,33 @@ router.get("/movie", function(req, res) {
         response.docs[0]["production_company"] = response.docs[0]["production_company"].split(",")
         response.docs[0]["language"] = response.docs[0]["language"].split(",")
         response.docs[0]["country"] = response.docs[0]["country"].split(",")
-       
-        let movie = response.docs[0]
-        console.log(movie)
-        res.render("more_info", {movie: movie})
-    })
+        
+        movie = response.docs[0]
+        
+        // console.log(movie)
 
-    // res.render()
+        client_reviews.search(q_reviews, function(err, result) {
+            if (err) {
+                console.log(err)
+                return
+            }
+            response_reviews = result.response
+
+            let reviews = response_reviews.docs
+
+            // console.log(reviews)
+            res.render("more_info", {movie: movie, reviews: reviews})
+        })
+    })
+    
+
+    
+    
+    
+    
+    
+    
+
 })
 
 router.get("/", function(req, res) {
