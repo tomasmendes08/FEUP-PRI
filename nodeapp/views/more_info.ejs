@@ -44,7 +44,7 @@
                 </li>
             </ul>
         </div>
-        <div class="row justify-content-around">
+        <div class="row">
             <img
                 src="<%= movie.Poster %>"
                 class="movie-img img-fluid rounded-3 col-3"
@@ -454,13 +454,11 @@
         </div>
     </div>
     <div class="movie-reviews" id="reviews">
-        <div class="movie-reviews-title fs-2 fw-bold">Reviews</div>
-        <div class="movie-reviews-conten mt-4">
-            <ul>
-                <% for(let i = 0; i < reviews.length; i++){ %>
-                    <li class="mb-2 fs-5"><%= reviews[i].review_content %></li>
-                <%}%>
-            </ul>
+        <div class="movie-reviews-title fs-2 fw-bold mb-4">Reviews</div>
+        <div class="movie-reviews">  
+            <% reviews.forEach(function(review) { %>
+                <%- include('partials/_review', {review: review}) %>
+            <% }) %>    
         </div>
     </div>
     <div class="row justify-content-end">

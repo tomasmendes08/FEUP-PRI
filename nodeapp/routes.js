@@ -71,7 +71,15 @@ router.get("/movie", function(req, res) {
                 console.log(err)
                 return
             }
-            response_reviews = result.response
+            let response_reviews = result.response
+
+            for (let i = 0; i < response_reviews.docs.length; i++) {
+                response_reviews.docs[i]["review_date"] = response_reviews.docs[i]["review_date"].slice(0,10)
+            }
+
+            response_reviews.docs.sort(function(x, y){
+                return (x["top_critic"] === y["top_critic"])? 0 : x? -1 : 1;
+            })
 
             let reviews = response_reviews.docs
 

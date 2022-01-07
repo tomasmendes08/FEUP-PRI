@@ -103,7 +103,7 @@ movies = movies[["imdb_title_id", "rotten_tomatoes_link", "original_title", "ori
 #reviews
 reviews.dropna(subset=["review_content"], inplace=True, how="all")
 reviews["review_date"] = reviews["review_date"].fillna("0000-01-01")
-reviews['review_date'] = reviews['review_date'].map(lambda x: str(x) + "T00:00:00Z")
+# reviews['review_date'] = reviews['review_date'].map(lambda x: str(x) + "T00:00:00Z")
 
 
 # keep only 20 reviews (max) for each movie

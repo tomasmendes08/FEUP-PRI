@@ -45,6 +45,12 @@
         },
 
         {
+            "name": "top_critic",
+            "type": "standard_text",
+            "indexed": true
+        },
+
+        {
             "name": "review_date",
             "type": "daterange",
             "indexed": true
