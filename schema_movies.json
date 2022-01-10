@@ -3,23 +3,17 @@
         {
             "name":"standard_text",
             "class":"solr.TextField",
-            "indexAnalyzer":{
+            "analyzer":{
                 "tokenizer":{
-                    "class":"solr.StandardTokenizerFactory"
+                    "class":"solr.OpenNLPTokenizerFactory",
+                    "sentenceModel":"en-sent.bin",
+                    "tokenizerModel":"en-token.bin"
                 },
                 "filters":[
                     {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
                     {"class":"solr.LowerCaseFilterFactory"},
-					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt"}
-                ]
-            },
-            "queryAnalyzer":{
-                "tokenizer":{
-                    "class":"solr.StandardTokenizerFactory"
-                },
-                "filters":[
-                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
-                    {"class":"solr.LowerCaseFilterFactory"},
+                    {"class":"solr.EnglishPossessiveFilterFactory"},
+                    {"class":"solr.EnglishMinimalStemFilterFactory"},
 					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt"}
                 ]
             }
@@ -27,7 +21,7 @@
         {
             "name":"daterange",
             "class":"solr.DateRangeField"
-        },
+        }
 	],
 	
 	

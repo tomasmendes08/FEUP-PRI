@@ -19,7 +19,7 @@
 		"class":"solr.SearchHandler",
         "defaults":
 		{
-          "echoParams":"explicit",,
+          "echoParams":"explicit",
 		  "spellcheck.dictionary":"default",
           "spellcheck":"on",
           "spellcheck.extendedResults":"true",
@@ -35,4 +35,5 @@
 		"last-components":["spellcheck"]
 		
 	}
+	
 }

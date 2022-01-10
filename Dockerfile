@@ -1,5 +1,7 @@
 FROM solr:8.10
 
+ADD models /models
+
 COPY dataset/data.json /data/data.json
 
 COPY dataset/Refined/rt_reviews.csv /data/reviews.csv
