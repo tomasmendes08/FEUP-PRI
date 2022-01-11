@@ -27,6 +27,10 @@ cp /models/en-lemmatizer-dict.txt /var/solr/data/movies/conf/en-lemmatizer-dict.
 
 cp /models/stop.pos.txt /var/solr/data/movies/conf/stop.pos.txt
 
+cp /models/en-ner-person.bin /var/solr/data/movies/conf/en-ner-person.bin
+
+mv config.xml /var/solr/data/movies/conf/solrconfig.xml
+
 cp contrib/analysis-extras/lib/icu4j-62.1.jar /var/solr/data/movies/lib
 cp contrib/analysis-extras/lib/opennlp-tools-1.9.2.jar /var/solr/data/movies/lib
 cp contrib/analysis-extras/lib/morfologik-stemming-2.1.5.jar /var/solr/data/movies/lib
@@ -36,6 +40,13 @@ cp contrib/analysis-extras/lucene-libs/lucene-analyzers-morfologik-8.10.1.jar /v
 cp contrib/analysis-extras/lucene-libs/lucene-analyzers-opennlp-8.10.1.jar /var/solr/data/movies/lib
 cp contrib/analysis-extras/lucene-libs/lucene-analyzers-smartcn-8.10.1.jar /var/solr/data/movies/lib
 cp contrib/analysis-extras/lucene-libs/lucene-analyzers-stempel-8.10.1.jar /var/solr/data/movies/lib
+
+cp dist/solr-analysis-extras-8.10.1.jar /var/solr/data/movies/lib
+cp dist/solr-analytics-8.10.1.jar /var/solr/data/movies/lib
+cp dist/solr-cell-8.10.1.jar /var/solr/data/movies/lib
+cp dist/solr-core-8.10.1.jar /var/solr/data/movies/lib
+cp dist/solr-dataimporthandler-8.10.1.jar /var/solr/data/movies/lib
+cp dist/solr-dataimporthandler-extras-8.10.1.jar /var/solr/data/movies/lib
 
 # Schema definition via API
 

@@ -15,7 +15,7 @@
                         "posTaggerModel": "en-pos-maxent.bin"
                     },
                     {
-                        "class": "solr.OpenNLPChunkerFactory",
+                        "class": "solr.OpenNLPChunkerFilterFactory",
                         "chunkerModel": "en-chunker.bin"
                     },
                     {

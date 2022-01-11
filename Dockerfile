@@ -12,6 +12,8 @@ COPY schema_reviews.json /data/schema_reviews.json
 
 COPY config.json /data/config.json
 
+COPY config.json /config.xml
+
 COPY startup.sh /scripts/startup.sh
 
 COPY src/synonyms.txt /data/synonyms.txt
