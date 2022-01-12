@@ -5,13 +5,12 @@ precreate-core movies
 precreate-core reviews
 
 # Start Solr in background mode so we can use the API to upload the schema
-solr start
 
-sleep 7
+sed -i $'/<\/config>/{e cat config.xml\n}' /var/solr/data/movies/conf/solrconfig.xml
+
+solr start -Dsolr.ltr.enabled=true
 
 cp /data/synonyms.txt /var/solr/data/movies/conf
-
-mkdir /var/solr/data/movies/lib
 
 cp /models/en-ner-person.bin /var/solr/data/movies/conf/en-ner-person.bin
 
@@ -29,30 +28,12 @@ cp /models/stop.pos.txt /var/solr/data/movies/conf/stop.pos.txt
 
 cp /models/en-ner-person.bin /var/solr/data/movies/conf/en-ner-person.bin
 
-mv config.xml /var/solr/data/movies/conf/solrconfig.xml
-
-cp contrib/analysis-extras/lib/icu4j-62.1.jar /var/solr/data/movies/lib
-cp contrib/analysis-extras/lib/opennlp-tools-1.9.2.jar /var/solr/data/movies/lib
-cp contrib/analysis-extras/lib/morfologik-stemming-2.1.5.jar /var/solr/data/movies/lib
-
-cp contrib/analysis-extras/lucene-libs/lucene-analyzers-icu-8.10.1.jar /var/solr/data/movies/lib
-cp contrib/analysis-extras/lucene-libs/lucene-analyzers-morfologik-8.10.1.jar /var/solr/data/movies/lib
-cp contrib/analysis-extras/lucene-libs/lucene-analyzers-opennlp-8.10.1.jar /var/solr/data/movies/lib
-cp contrib/analysis-extras/lucene-libs/lucene-analyzers-smartcn-8.10.1.jar /var/solr/data/movies/lib
-cp contrib/analysis-extras/lucene-libs/lucene-analyzers-stempel-8.10.1.jar /var/solr/data/movies/lib
-
-cp dist/solr-analysis-extras-8.10.1.jar /var/solr/data/movies/lib
-cp dist/solr-analytics-8.10.1.jar /var/solr/data/movies/lib
-cp dist/solr-cell-8.10.1.jar /var/solr/data/movies/lib
-cp dist/solr-core-8.10.1.jar /var/solr/data/movies/lib
-cp dist/solr-dataimporthandler-8.10.1.jar /var/solr/data/movies/lib
-cp dist/solr-dataimporthandler-extras-8.10.1.jar /var/solr/data/movies/lib
-
+sleep 15
 # Schema definition via API
 
-curl -X POST -H 'Content-type:application/json' \
-    --data-binary @/data/config.json \
-    http://localhost:8983/solr/movies/config
+# curl -X POST -H 'Content-type:application/json' \
+#     --data-binary @/data/config.json \
+#     http://localhost:8983/solr/movies/config
 
 curl -X POST -H 'Content-type:application/json' \
     --data-binary @/data/schema_movies.json \
@@ -61,6 +42,14 @@ curl -X POST -H 'Content-type:application/json' \
 curl -X POST -H 'Content-type:application/json' \
     --data-binary @/data/schema_reviews.json \
     http://localhost:8983/solr/reviews/schema
+
+curl -XPUT -H 'Content-type:application/json' \
+    --data-binary @/ltr/ltr_features.json \
+    http://localhost:8983/solr/movies/schema/feature-store
+
+curl -XPUT -H 'Content-type:application/json' \
+    --data-binary @/ltr/ltr_model.json \
+    http://localhost:8983/solr/movies/schema/model-store
 	
 
 # Populate collection

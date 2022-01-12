@@ -1,0 +1,20 @@
+[
+    {
+        "store" : "my_efi_feature_store",
+        "name" : "maximize_score",
+        "class" : "org.apache.solr.ltr.feature.SolrFeature",
+        "params" : { "q" : "{!func}scale(mean_vote_imdb, 0, 1)" }
+    },
+    {
+      "store" : "my_efi_feature_store",
+      "name" : "maximize_votes",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : { "q" : "{!func}scale(total_votes, 0, 1)" }
+  },
+    {
+      "store" : "my_efi_feature_store",
+      "name" : "original_score",
+      "class" : "org.apache.solr.ltr.feature.OriginalScoreFeature",
+      "params" : {}
+    }
+  ]
