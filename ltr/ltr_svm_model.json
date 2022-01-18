@@ -1,0 +1,31 @@
+{
+    "store" : "my_efi_feature_store",
+    "name" : "my_svm_model",
+    "class" : "org.apache.solr.ltr.model.LinearModel",
+    "features" : [
+      { 
+        "name" : "maximize_votes"
+      },
+      { 
+        "name" : "maximize_rating"
+      },
+      { 
+        "name" : "review_bm25"
+      },
+      { 
+        "name" : "description_bm25"
+      },
+      { 
+        "name" : "original_score"
+      }
+    ],
+    "params" : {
+      "weights" : {
+        "review_bm25": -0.31009501,
+        "description_bm25": 1.93000477,
+        "maximize_votes": 0.06252675,
+        "maximize_rating": 0.18448811,
+        "original_score" : 0.05992947
+      }
+    }
+}

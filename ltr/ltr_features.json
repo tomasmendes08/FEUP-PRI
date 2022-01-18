@@ -1,15 +1,27 @@
 [
     {
       "store" : "my_efi_feature_store",
-      "name" : "maximize_score",
+      "name" : "maximize_votes",
       "class" : "org.apache.solr.ltr.feature.SolrFeature",
-      "params" : { "q" : "{!func}scale(mean_vote_imdb, 0, 50)" }
+      "params" : { "q" : "{!func}scale(total_votes,0,1)" }
     },
     {
       "store" : "my_efi_feature_store",
-      "name" : "maximize_votes",
+      "name" : "maximize_rating",
       "class" : "org.apache.solr.ltr.feature.SolrFeature",
-      "params" : { "q" : "{!func}scale(total_votes, 0, 50)" }
+      "params" : { "q" : "{!func}scale(mean_vote_imdb,0,1)" }
+    },
+    {
+      "store" : "my_efi_feature_store",
+      "name" : "review_bm25",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : { "q" : "{!dismax qf='review_content'}${text}" }
+    },
+    {
+      "store" : "my_efi_feature_store",
+      "name" : "description_bm25",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : { "q" : "{!dismax qf='movie_info'}${text}" }
     },
     {
       "store" : "my_efi_feature_store",

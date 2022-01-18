@@ -1,7 +1,7 @@
 {
 	"add-field-type": [
         {
-            "name":"standard_text",
+            "name":"nlp_text",
             "class":"solr.TextField",
             "analyzer":{
                 "tokenizer":{
@@ -21,10 +21,65 @@
                     {
                         "class": "solr.TypeAsPayloadFilterFactory"
                     },
+
+					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt", "expand":"true", "ignoreCase":"true", "tokenizerFactory":"solr.StandardTokenizerFactory"},
                     {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
                     {"class":"solr.LowerCaseFilterFactory"},
                     {"class":"solr.EnglishPossessiveFilterFactory"},
                     {"class":"solr.EnglishMinimalStemFilterFactory"}
+                ]
+            }
+        },
+        {
+            "name":"standard_text",
+            "class":"solr.TextField",
+            "indexAnalyzer":{
+                "tokenizer":{
+                    "class":"solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
+                    {"class":"solr.LowerCaseFilterFactory"},
+                    {"class":"solr.EnglishPossessiveFilterFactory"},
+                    {"class":"solr.EnglishMinimalStemFilterFactory"},
+					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt", "expand":"true", "ignoreCase":"true", "tokenizerFactory":"solr.StandardTokenizerFactory"}
+                ]
+            },
+            "queryAnalyzer":{
+                "tokenizer":{
+                    "class":"solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
+                    {"class":"solr.LowerCaseFilterFactory"},
+                    {"class":"solr.EnglishPossessiveFilterFactory"},
+                    {"class":"solr.EnglishMinimalStemFilterFactory"},
+					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt", "expand":"true", "ignoreCase":"true", "tokenizerFactory":"solr.StandardTokenizerFactory"}
+                ]
+            }
+        },
+
+        {
+            "name":"ner_field",
+            "class":"solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class":"solr.OpenNLPTokenizerFactory",
+                    "sentenceModel":"en-sent.bin",
+                    "tokenizerModel":"en-token.bin"
+                },
+                "filters":[
+                    {
+                        "class": "solr.OpenNLPPOSFilterFactory",
+                        "posTaggerModel": "en-pos-maxent.bin"
+                    },
+                    {
+                        "class": "solr.OpenNLPChunkerFilterFactory",
+                        "chunkerModel": "en-chunker.bin"
+                    },
+                    {
+                        "class": "solr.TypeAsPayloadFilterFactory"
+                    }
                 ]
             }
         },
@@ -56,7 +111,7 @@
         },
         {
             "name": "original_title",
-            "type": "standard_text",
+            "type": "nlp_text",
             "indexed": true
         },
         {
@@ -126,7 +181,7 @@
         },
         {
             "name": "movie_info",
-            "type": "standard_text",
+            "type": "nlp_text",
             "indexed": true
         },
         {
@@ -217,9 +272,33 @@
         },
         {
             "name": "review_content",
-            "type": "text_en",
+            "type": "nlp_text",
             "indexed": true,
             "stored": true,
+            "multiValued": true
+        },
+        {
+            "name": "ner_dest_field",
+            "type": "standard_text",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "ner_dest_org",
+            "type": "standard_text",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "ner_dest_date",
+            "type": "standard_text",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "ner_dest_location",
+            "type": "standard_text",
+            "indexed": true,
             "multiValued": true
         }
         

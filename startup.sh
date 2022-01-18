@@ -14,6 +14,12 @@ cp /data/synonyms.txt /var/solr/data/movies/conf
 
 cp /models/en-ner-person.bin /var/solr/data/movies/conf/en-ner-person.bin
 
+cp /models/en-ner-organization.bin /var/solr/data/movies/conf/en-ner-organization.bin
+
+cp /models/en-ner-date.bin /var/solr/data/movies/conf/en-ner-date.bin
+
+cp /models/en-ner-location.bin /var/solr/data/movies/conf/en-ner-location.bin
+
 cp /models/en-sent.bin /var/solr/data/movies/conf/en-sent.bin
 
 cp /models/en-token.bin /var/solr/data/movies/conf/en-token.bin

@@ -3,25 +3,29 @@
     "name" : "my_efi_model",
     "class" : "org.apache.solr.ltr.model.LinearModel",
     "features" : [
-    { 
-      "name" : "maximize_score"
-    },
-    { 
-      "name" : "maximize_votes"
-    },
-    { 
-      "name" : "original_score",
-      "norm" : {
-        "class" : "org.apache.solr.ltr.norm.MinMaxNormalizer",
-        "params" : { "min":"0", "max":"50"}
+      { 
+        "name" : "maximize_votes"
+      },
+      { 
+        "name" : "maximize_rating"
+      },
+      { 
+        "name" : "review_bm25"
+      },
+      { 
+        "name" : "description_bm25"
+      },
+      { 
+        "name" : "original_score"
       }
-    }
     ],
     "params" : {
       "weights" : {
-        "maximize_score": 3.0,
-        "maximize_votes": 3.0,
-        "original_score" : 5.0
+        "review_bm25": 0.02208886,
+        "description_bm25": 0.01461404,
+        "maximize_votes": 0.0076365,
+        "maximize_rating": -0.00104206,
+        "original_score" : 0.0010334
       }
     }
 }
