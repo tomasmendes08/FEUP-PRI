@@ -10,5 +10,6 @@ for l in list(lines):
         continue
     else:
         l[-1] = l[-1].strip()
-        file.write(",".join(l) + "\n")
+        file.write(l[0] + " => " + ", ".join(list(set(l[1:]))) + "\n")
+    
     

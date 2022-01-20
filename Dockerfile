@@ -18,6 +18,6 @@ COPY config.xml config.xml
 
 COPY startup.sh /scripts/startup.sh
 
-COPY src/synonyms.txt /data/synonyms.txt
+COPY synonyms/synonyms_fix.txt /data/synonyms.txt
 
 ENTRYPOINT ["/scripts/startup.sh"]

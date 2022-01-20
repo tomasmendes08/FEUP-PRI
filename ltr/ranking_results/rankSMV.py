@@ -7,6 +7,7 @@ from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import classification_report, plot_confusion_matrix
 from sklearn import svm, linear_model
+from sklearn.preprocessing import MinMaxScaler
 from pairwiseSVM import RankSVM
 from sklearn.model_selection import KFold
 import pairwiseSVM
@@ -75,8 +76,15 @@ X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size = 0.20
     PAIRWISE APPROACH
 """
 
+# scaler = MinMaxScaler()
+# X_minmax_train = scaler.fit_transform(X_train.to_numpy())
+# y_minmax_train = scaler.fit_transform(y_train.to_numpy())
+
+# X_minmax_test = scaler.fit_transform(X_test.to_numpy())
+# y_minmax_test = scaler.fit_transform(y_test.to_numpy())
+
 rank_svm = RankSVM().fit(X_train.to_numpy(), y_train.to_numpy())
-print('Performance of SVM ranking ', rank_svm.score(X_test.to_numpy(),y_test.to_numpy()))
+print('Performance of SVM ranking ', rank_svm.score(X_test.to_numpy(), y_test.to_numpy()))
 
 
 # # and that of linear regression

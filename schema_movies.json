@@ -22,7 +22,7 @@
                         "class": "solr.TypeAsPayloadFilterFactory"
                     },
 
-					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt", "expand":"true", "ignoreCase":"true", "tokenizerFactory":"solr.StandardTokenizerFactory"},
+					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt", "expand":"false", "ignoreCase":"true"},
                     {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
                     {"class":"solr.LowerCaseFilterFactory"},
                     {"class":"solr.EnglishPossessiveFilterFactory"},
@@ -42,7 +42,7 @@
                     {"class":"solr.LowerCaseFilterFactory"},
                     {"class":"solr.EnglishPossessiveFilterFactory"},
                     {"class":"solr.EnglishMinimalStemFilterFactory"},
-					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt", "expand":"true", "ignoreCase":"true", "tokenizerFactory":"solr.StandardTokenizerFactory"}
+					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt", "expand":"false", "ignoreCase":"true"}
                 ]
             },
             "queryAnalyzer":{
@@ -54,7 +54,7 @@
                     {"class":"solr.LowerCaseFilterFactory"},
                     {"class":"solr.EnglishPossessiveFilterFactory"},
                     {"class":"solr.EnglishMinimalStemFilterFactory"},
-					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt", "expand":"true", "ignoreCase":"true", "tokenizerFactory":"solr.StandardTokenizerFactory"}
+					{"class":"solr.SynonymGraphFilterFactory", "synonyms":"synonyms.txt", "expand":"false", "ignoreCase":"true"}
                 ]
             }
         },

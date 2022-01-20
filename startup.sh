@@ -10,7 +10,11 @@ sed -i $'/<\/config>/{e cat config.xml\n}' /var/solr/data/movies/conf/solrconfig
 
 solr start -Dsolr.ltr.enabled=true
 
+echo "Copying synonyms"
+
 cp /data/synonyms.txt /var/solr/data/movies/conf
+
+echo "Done copying synonyms"
 
 cp /models/en-ner-person.bin /var/solr/data/movies/conf/en-ner-person.bin
 

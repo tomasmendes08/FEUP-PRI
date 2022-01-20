@@ -21,11 +21,11 @@
     ],
     "params" : {
       "weights" : {
-        "review_bm25": 0.02208886,
-        "description_bm25": 0.01461404,
-        "maximize_votes": 0.0076365,
-        "maximize_rating": -0.00104206,
-        "original_score" : 0.0010334
+        "review_bm25": 0.0,
+        "description_bm25": 0.0,
+        "maximize_votes": 0.0,
+        "maximize_rating": 0.0,
+        "original_score" : 1.0
       }
     }
 }
